@@ -33,6 +33,7 @@
                             <th>Date</th>
                             <th>Author</th>
                             <th>Favourite</th>
+                            <th>Synced</th>
                             <th>Actions</th>
                         </tr>
                     </thead>

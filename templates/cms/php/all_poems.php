@@ -26,6 +26,7 @@
             echo "<td>{$decoded->getDate()}</td>";
             echo "<td>{$decoded->getAuthor()}</td>";
             echo "<td>{$decoded->getFavourite()}</td>";
+            echo "<td>{$decoded->getSynced()}</td>";
             echo "<td>";
             echo "<input class='edit' data-id=\"{$currentEncoded->getId()}\" data-name=\"{$currentEncoded->getName()}\" data-poem=\"{$currentEncoded->getPoem()}\" data-author=\"{$currentEncoded->getAuthor()}\" type=\"image\" src=\"images/icn_edit.png\" title=\"Edit\">";
             echo "<input class='delete' data-id=\"{$currentEncoded->getId()}\" type=\"image\" src=\"images/icn_trash.png\" title=\"Trash\">";
