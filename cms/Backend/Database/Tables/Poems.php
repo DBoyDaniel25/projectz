@@ -18,7 +18,6 @@
         const NAME = "name";
         const AUTHOR = "author";
         const JSON_NAME = "poems.json";
-        const JSON_UNSYNCED_NAME = "unsynced_poems.json";
 
         private $id;
         private $author;
@@ -37,11 +36,8 @@
 
             // prepared statements
             $this->c = $this->connection->prepare("INSERT INTO poems (author, date, poemname, poem, favourite, synced, to_update) VALUES (?, ?, ?, ?, ?, ?, ?);");
-
             $this->r = $this->connection->prepare("SELECT * FROM poems WHERE id = ?;");
-
             $this->u = $this->connection->prepare("UPDATE poems SET author = ?, poemname = ?, poem = ?, favourite = ?, synced = ?, to_update = ? WHERE id = ?;");
-
             $this->d = $this->connection->prepare("DELETE FROM poems  WHERE id = ?;");
 
 
@@ -70,7 +66,7 @@
                 $this->toUpdate  = $this->clean($obj->getToUpdate());
                 if ($this->c->execute()) {
                     $this->createJson(self::JSON_NAME, $this->readAll(true));
-                    $this->createJson(self::JSON_UNSYNCED_NAME, $this->readUnsynced(true));
+
                     return true;
                 }
             }
@@ -97,37 +93,6 @@
                             $obj->poem, $obj->date, $obj->favourite, $obj->synced, $obj->to_update);
 
                         return $poem;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-
-        /**
-         * Retrieve rows based on the last row and the max number of rows
-         *
-         * @param int $lastRow Last rows pulled from the database
-         * @param int $max     How many rows to to retrieve
-         *
-         * @return Poem[]|bool Array of poem objects, false on failure
-         */
-        public function readByLimit($lastRow, $max) {
-            if (is_numeric($lastRow) && is_numeric($max)) {
-                // check if successful
-                if ($this->r->execute()) {
-                    // check if rows are returned
-                    if ($this->r->num_rows > 0) {
-                        $data = [];
-                        // fetch results and store it into an array
-                        while ($row = $this->r->get_result()->fetch_object()) {
-                            $obj    = new Poem($row->id, $row->author, $row->poemname,
-                                $row->poem, $row->date, $row->favourite, $row->synced, $row->to_update);
-                            $data[] = $obj;
-                        }
-
-                        return $data;
                     }
                 }
             }
@@ -162,17 +127,18 @@
 
                 return $data;
             }
+
             return false;
         }
+
         /**
          * Retrieve all unsynced rows
          *
          *
-         * @param bool $decode Decode Data before receiving it
          *
          * @return \Backend\Database\Schemas\Poem[]|bool Array of poem objects, false on failure
          */
-        public function readUnsynced($decode = false) {
+        public function readUnsynced() {
             $query  = "SELECT * FROM poems WHERE synced = 'false' ORDER BY id DESC;";
             $result = mysqli_query($this->connection, $query);
 
@@ -180,24 +146,22 @@
                 $data = [];
                 while ($row = mysqli_fetch_object($result)) {
                     $this->strip($row);
-                    if ($decode) {
-                        $this->htmlDecode($row);
-                    }
+                    $this->htmlDecode($row);
                     $obj    = new Poem($row->id, $row->author, $row->poemname,
                         $row->poem, $row->date, $row->favourite, $row->synced, $row->to_update);
                     $data[] = $obj;
                 }
-
+                $this->updateUnSyncedToSynced();
                 return $data;
             }
             return false;
         }
-    /**
+
+        /**
          * Updates all unsynced rows to synced
-         *
          */
-        public function updateUnSyncedToSynced($decode = false) {
-            $query  = "update poems set synced = 'true' where synced = 'false';";
+        private function updateUnSyncedToSynced() {
+            $query = "UPDATE poems SET synced = 'true' WHERE synced = 'false';";
             mysqli_query($this->connection, $query);
         }
 
@@ -228,6 +192,7 @@
                     $this->toUpdate  = (is_null($obj->getToUpdate())) ? $oldData->getToUpdate() : $obj->getToUpdate();
                     if ($this->u->execute()) {
                         $this->createJson(self::JSON_NAME, $this->readAll(true));
+
                         return $this->u->affected_rows > 0;
                     }
                 }

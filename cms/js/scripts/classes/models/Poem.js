@@ -8,6 +8,14 @@ var Poem = function () {
 // assign structure prototype to brand class (inherit it's methods)
 Poem.prototype = Object.create(Structure.prototype);
 
+/**
+ *
+ * @param data
+ * @param data.name
+ * @param data.poem
+ * @param data.author
+ * @param response Response from server
+ */
 Poem.prototype.updateTable = function (data, response) {
     var table = new Table("#tbody");
     table.changeCell(data.id, 0, data.name);

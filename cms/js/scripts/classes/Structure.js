@@ -78,6 +78,7 @@ Structure.prototype.populateForm = function (setId) {
         }
 
         if (this.fieldNames[i].toLowerCase().indexOf("checkbox") !== -1) {
+            //noinspection RedundantIfStatementJS
             if (this[this.fieldNames[i]] === "true") {
                 document.querySelector("#" + this.fieldNames[i]).checked = true;
             } else {

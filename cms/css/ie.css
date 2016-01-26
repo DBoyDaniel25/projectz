@@ -1,17 +1,16 @@
 .quick_search {
     text-align : center;
-    padding    : 14px 0 0px 0;
+    padding    : 14px 0 0 0;
 }
 
 .quick_search input[type=text] {
-    text-align          : left;
-    height              : 22px;
-    width               : 88%;
-    color               : #CCC;
-    padding-left        : 2%;
-    padding-top         : 5px;
-    background          : #FFF url(../../images/icn_search.png) no-repeat;
-    background-position : 10px 6px;
+    text-align   : left;
+    height       : 22px;
+    width        : 88%;
+    color        : #CCC;
+    padding-left : 2%;
+    padding-top  : 5px;
+    background   : #FFF url(../../images/icn_search.png) no-repeat 10px 6px;
 }
 
 .toggleLink {
