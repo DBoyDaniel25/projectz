@@ -1,0 +1,61 @@
+.relative {
+    position : relative;
+}
+
+.absolute {
+    position : absolute;
+}
+
+.hidden {
+    visibility : hidden !important;
+}
+
+.hide {
+    display : none !important;
+}
+
+.spacer-top {
+    margin-top : 10px;
+}
+
+.spacer-bottom {
+    margin-bottom : 10px;
+}
+
+.spacer {
+    height : 20px;
+}
+
+.normal-font {
+    font-weight : normal;
+}
+
+.fixed-height {
+    max-height : 80vh;
+    overflow   : auto;
+}
+
+form .label-width {
+    width : auto;
+}
+
+form .center-radio-btns {
+    transform : translateY(17%);
+}
+
+fieldset input.center_full_width {
+    margin-left : 2px;
+}
+
+#tbody p * {
+    font-size : 14px !important;
+}
+
+#close {
+    cursor : pointer;
+}
+
+[data-hide] {
+    opacity : 0;
+    z-index : -1;
+}

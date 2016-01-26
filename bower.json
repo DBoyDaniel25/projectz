@@ -1,0 +1,22 @@
+{
+  "name": "projectz",
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "authors": [
+    "Daniel M. Prince <programmer96@hotmail.com>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "ajaxify": "/home/prince/Templates/ajaxify/"
+  }
+}

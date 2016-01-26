@@ -1,0 +1,72 @@
+{% extends "main.nunjucks" %}
+
+{# ID for the submit button #}
+{% set submitId = "update" %}
+{% set hide     = true %}
+{% set submitValue     = "Update" %}
+{% set formName     = "Update Poem" %}
+{% set showCloseBtn     = true %}
+
+{% block head %}
+    <style>
+        #form {
+            display: none;
+        }
+    </style>
+{% endblock %}
+
+
+{% block body %}
+    {% include 'poem_form.nunjucks' %}
+    <article id="content_manager" class="module module width_full">
+        <header>
+            <h3 class="tabs_involved">Poem Manager</h3>
+        </header>
+
+        <div class="tab_container">
+            <div class="tab_content">
+                <table class="tablesorter" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Poem</th>
+                            <th>Date</th>
+                            <th>Author</th>
+                            <th>Favourite</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbody">
+                        {% include 'all_poems.php' %}
+                        {#<tr>#}
+                            {#<td>My Princess</td>#}
+                            {#<td>I love you so</td>#}
+                            {#<td>5th April 2011</td>#}
+                            {#<td>Daniel Prince</td>#}
+                            {#<td>false</td>#}
+                            {#<td>#}
+                                {#<input type="image" src="../../cms/images/icn_edit.png" title="Edit">#}
+                                {#<input type="image" src="../../cms/images/icn_trash.png" title="Trash">#}
+                            {#</td>#}
+                        {#</tr>#}
+                    </tbody>
+                </table>
+
+            </div><!-- end of #tab2 -->
+
+        </div><!-- end of .tab_container -->
+
+    </article>
+{% endblock %}
+
+{% block footer %}
+    <script src="js/vendors/jquery-1.5.2.min.js"></script>
+    {# Manage Populating & Retrieving Data #}
+    <script src="js/scripts/classes/models/Poem.js"></script>
+
+    {# Decide when to communicate from client to server #}
+    <script src="js/scripts/poem/manage.js"></script>
+
+    {# General Methods for Deleting or Showing the Edit Form #}
+    <script src="js/scripts/general.js"></script>
+{% endblock %}
