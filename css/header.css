@@ -1,0 +1,78 @@
+.landing {
+    height          : 100vh;
+    background      : linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)), url('imgs/bg_1.jpg') no-repeat;
+    background-size : cover;
+    position        : relative;
+}
+
+.product-name {
+    color : #E60000;
+}
+
+nav {
+    background-color : #EC407A;
+    position         : relative;
+    height           : 85px;
+}
+
+.landing ul {
+    display     : inline;
+    position    : absolute;
+    margin      : 0;
+    line-height : 85px;
+    right       : 10px;
+    font-size   : 130%;
+    font-weight : bold;
+}
+
+.landing li {
+    display      : inline-block;
+    margin-right : 20px;
+}
+
+.landing .logo {
+    font-size   : 200%;
+    font-weight : bolder;
+    line-height : 85px;
+    margin-left : 10px;
+    position    : absolute;
+    width       : 25%;
+}
+
+.landing li, .landing .logo {
+    color : #FFF;
+}
+
+.landing img {
+    height    : auto;
+    left      : 50%;
+    position  : absolute;
+    top       : 55px;
+    transform : translateX(-50%);
+    width     : 80px;
+}
+
+.landing .logo:hover {
+    color : #CE93D8;
+}
+
+.landing li:hover {
+    color : #CE93D8;
+}
+
+.land-content, .land-info {
+    color          : #FFF;
+    left           : 50%;
+    position       : absolute;
+    top            : 35%;
+    transform      : translateX(-50%);
+    text-transform : uppercase;
+    text-align     : center;
+    width          : 100%;
+}
+
+.land-info .info-block {
+    display : inline-block;
+    margin  : 0 5%;
+    width   : 32%;
+}
