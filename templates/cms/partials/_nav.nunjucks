@@ -21,6 +21,7 @@
     <h3>Create</h3>
     <ul class="toggle">
         <li><a href="poem.php">New Poem</a></li>
+        <li><a href="ilove.php">New I Love</a></li>
     </ul>
     <h3>Manage</h3>
     <ul class="toggle">
