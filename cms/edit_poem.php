@@ -84,6 +84,7 @@
     <h3>Create</h3>
     <ul class="toggle">
         <li><a href="poem.php">New Poem</a></li>
+        <li><a href="ilove.php">New I Love</a></li>
     </ul>
     <h3>Manage</h3>
     <ul class="toggle">
@@ -162,9 +163,9 @@
      * Time: 10:00 PM
      */
 
-    use Backend\Database\Tables\Poems;
+                            use Backend\Database\Tables\Poems;
 
-    include "../vendor/autoload.php";
+                            include "../vendor/autoload.php";
 
     $table = new Poems();
     $data = $table->readAll();

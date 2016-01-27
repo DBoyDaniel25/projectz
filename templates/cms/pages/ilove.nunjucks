@@ -1,0 +1,17 @@
+{% extends "main.nunjucks" %}
+
+{# ID for the submit button #}
+{% set submitId     = "create" %}
+{% set submitValue  = "Create" %}
+{% set formName     = "new Poem" %}
+
+{% block body %}
+    {% include 'ilove_form.nunjucks' %}
+{% endblock %}
+
+
+{% block footer %}
+    {# Manage Client Server actions#}
+    <script src="js/scripts/classes/models/ILove.js"></script>
+    <script src="js/scripts/ilove/manage.js"></script>
+{% endblock %}

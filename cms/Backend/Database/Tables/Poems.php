@@ -65,13 +65,15 @@
                 $this->synced    = $this->clean($obj->getSynced());
                 $this->toUpdate  = $this->clean($obj->getToUpdate());
                 if ($this->c->execute()) {
-                    $this->createJson(self::JSON_NAME, $this->readAll(true));
-
                     return true;
                 }
             }
 
             return false;
+        }
+
+        public function createJson($name, $data) {
+            parent::createJson($name, $data);
         }
 
         /**
@@ -94,6 +96,24 @@
 
                         return $poem;
                     }
+                }
+            }
+
+            return false;
+        }
+
+        /**
+         * Deletes a row in database table
+         *
+         * @param $id
+         *
+         * @return bool True on success, false on failure
+         */
+        public function delete($id) {
+            if (is_numeric($id)) {
+                $this->id = (int)$id;
+                if ($this->d->execute()) {
+                    return $this->d->affected_rows > 0;
                 }
             }
 
@@ -165,10 +185,6 @@
             mysqli_query($this->connection, $query);
         }
 
-        public function createJson($name, $data) {
-            parent::createJson($name, $data);
-        }
-
         /**
          * Updates a row in database table
          *
@@ -191,9 +207,7 @@
                     $this->synced    = (is_null($obj->getSynced())) ? $oldData->getSynced() : $obj->getSynced();
                     $this->toUpdate  = (is_null($obj->getToUpdate())) ? $oldData->getToUpdate() : $obj->getToUpdate();
                     if ($this->u->execute()) {
-                        $this->createJson(self::JSON_NAME, $this->readAll(true));
-
-                        return $this->u->affected_rows > 0;
+                        return true;
                     }
                 }
             }
@@ -201,23 +215,5 @@
             return false;
         }
 
-        /**
-         * Deletes a row in database table
-         *
-         * @param $id
-         *
-         * @return bool True on success, false on failure
-         */
-        public function delete($id) {
-            if (is_numeric($id)) {
-                $this->id = (int)$id;
-                if ($this->d->execute()) {
-                    $this->createJson("poems.json", $this->readAll());
 
-                    return $this->d->affected_rows > 0;
-                }
-            }
-
-            return false;
-        }
     }
