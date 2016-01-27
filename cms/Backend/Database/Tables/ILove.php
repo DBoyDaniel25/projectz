@@ -12,7 +12,7 @@
     use Backend\Database\Database;
 
     class ILove extends Database {
-        const I_LOVE = "ilove.json";
+        const JSON_NAME = "ilove.json";
         const LOVE = "ilove";
         const ROW_ID = "id";
         private $id;
@@ -49,6 +49,10 @@
             }
 
             return false;
+        }
+
+        public function createJson($name, $data) {
+            parent::createJson($name, $data);
         }
 
         public function delete($id) {
@@ -89,6 +93,26 @@
             return false;
         }
 
+        public function readUnsynced() {
+            $query  = "SELECT * FROM loveabout WHERE synced = 'false';";
+            $result = mysqli_query($this->connection, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+                $data = [];
+                while ($row = mysqli_fetch_object($result)) {
+                    $this->strip($row);
+                    $this->htmlDecode($row);
+                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
+                    $data[] = $obj;
+                }
+                $this->updateUnSyncedToSynced();
+
+                return $data;
+            }
+
+            return false;
+        }
+
         /**
          * @param $id
          *
@@ -108,26 +132,6 @@
                         return $ilove;
                     }
                 }
-            }
-
-            return false;
-        }
-
-        public function readUnsynced() {
-            $query  = "SELECT * FROM loveabout WHERE synced = 'false';";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    $this->htmlDecode($row);
-                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
-                    $data[] = $obj;
-                }
-                $this->updateUnSyncedToSynced();
-
-                return $data;
             }
 
             return false;

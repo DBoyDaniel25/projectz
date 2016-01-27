@@ -13,6 +13,6 @@
         $table = new Poems();
         // creates json then redirects to the JSON file
         $table->createJson(Poems::JSON_NAME, $table->readUnsynced());
-        header("Location: ../json/poems.json");
+        header("Location: ../json/" . Poems::JSON_NAME);
     }
 
