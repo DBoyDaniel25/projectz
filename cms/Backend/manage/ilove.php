@@ -18,3 +18,29 @@
             echo "false";
         }
     }
+
+    if (isset($_POST["update"])) {
+
+        $name = $_POST[\Backend\Database\Tables\ILove::LOVE];
+        $id   = $_POST[\Backend\Database\Tables\ILove::ROW_ID];
+
+        $obj = new \Backend\Database\Schemas\ILove($id, $name);
+
+        $table = new \Backend\Database\Tables\ILove();
+        if ($table->update($obj)) {
+            echo "true";
+        } else {
+            echo "false";
+        }
+    }
+
+    if (isset($_POST["delete"])) {
+        $id    = $_POST[\Backend\Database\Tables\ILove::ROW_ID];
+        $table = new \Backend\Database\Tables\ILove();
+
+        if ($table->delete($id)) {
+            echo "true";
+        } else {
+            echo "false";
+        }
+    }

@@ -89,6 +89,7 @@
     <h3>Manage</h3>
     <ul class="toggle">
         <li><a href="edit_poem.php">Edit Poem</a></li>
+        <li><a href="edit_ilove.php">Edit I Love</a></li>
     </ul>
     <footer>
         <hr/>

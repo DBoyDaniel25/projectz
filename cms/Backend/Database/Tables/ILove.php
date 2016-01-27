@@ -14,6 +14,7 @@
     class ILove extends Database {
         const I_LOVE = "ilove.json";
         const LOVE = "ilove";
+        const ROW_ID = "id";
         private $id;
         private $love;
         private $synced;
@@ -62,6 +63,33 @@
         }
 
         /**
+         * @param bool $decode
+         *
+         * @return \Backend\Database\Schemas\ILove[]|bool
+         */
+        public function readAll($decode = false) {
+            $query  = "SELECT * FROM loveabout ORDER BY id DESC;";
+            $result = mysqli_query($this->connection, $query);
+
+            if (mysqli_num_rows($result) > 0) {
+                $data = [];
+                while ($row = mysqli_fetch_object($result)) {
+                    $this->strip($row);
+                    if ($decode) {
+                        $this->htmlDecode($row);
+                    }
+
+                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
+                    $data[] = $obj;
+                }
+
+                return $data;
+            }
+
+            return false;
+        }
+
+        /**
          * @param $id
          *
          * @return \Backend\Database\Schemas\ILove|bool
@@ -80,28 +108,6 @@
                         return $ilove;
                     }
                 }
-            }
-
-            return false;
-        }
-
-        public function readAll($decode = false) {
-            $query  = "SELECT * FROM loveabout ORDER BY id DESC;";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    if ($decode) {
-                        $this->htmlDecode($row);
-                    }
-
-                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
-                    $data[] = $obj;
-                }
-
-                return $data;
             }
 
             return false;

@@ -16,7 +16,15 @@ var editBtn      = document.querySelectorAll(".edit"),
         document.querySelector("#form").style.display = "block";
         $("#form").addClass("showForm");
         document.querySelector("#content_manager").style.display = "none";
-        poem.getEditButtonData(e.target).populateForm(true);
+
+        if (manage.processFile.indexOf("poem") !== -1) {
+            poem.getEditButtonData(e.target).populateForm(true);
+        }
+
+        if (manage.processFile.indexOf("ilove") !== -1) {
+            ilove.getEditButtonData(e.target).populateForm(true);
+        }
+
     },
     deleteMethod = function (e) {
         e.preventDefault();

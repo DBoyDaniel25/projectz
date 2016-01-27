@@ -20,7 +20,7 @@ if (submitBtn) {
     }, false);
 } else {
     var updateBtn = document.querySelector("#update");
-    ilove         = new Poem("id", "ilove");
+    ilove         = new ILove("id", "ilove");
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = ilove.getFormValues(true).getValues();
