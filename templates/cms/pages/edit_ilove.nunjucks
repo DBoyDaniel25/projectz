@@ -4,7 +4,7 @@
 {% set submitId = "update" %}
 {% set hide     = true %}
 {% set submitValue     = "Update" %}
-{% set formName     = "Update Poem" %}
+{% set formName     = "Update I Love" %}
 {% set showCloseBtn     = true %}
 
 {% block head %}
@@ -20,7 +20,7 @@
     {% include 'ilove_form.nunjucks' %}
     <article id="content_manager" class="module module width_full">
         <header>
-            <h3 class="tabs_involved">Poem Manager</h3>
+            <h3 class="tabs_involved">I Love Manager</h3>
         </header>
 
         <div class="tab_container">

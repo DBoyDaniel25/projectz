@@ -12,6 +12,7 @@ if (submitBtn) {
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = ilove.getFormValues().getValues();
+        console.log(data);
         if (validate.isFieldsEmpty(data)) {
             notif.error("Please fill in all fields");
             return;

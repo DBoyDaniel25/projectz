@@ -94,7 +94,7 @@
         }
 
         public function readUnsynced() {
-            $query  = "SELECT * FROM loveabout WHERE synced = 'false';";
+            $query  = "SELECT * FROM loveabout WHERE synced = 'false' ORDER BY id DESC;";
             $result = mysqli_query($this->connection, $query);
 
             if (mysqli_num_rows($result) > 0) {
@@ -113,6 +113,11 @@
             return false;
         }
 
+        private function updateUnSyncedToSynced() {
+            $query = "UPDATE loveabout SET synced = 'true' WHERE synced = 'false';";
+            mysqli_query($this->connection, $query);
+        }
+
         /**
          * @param $id
          *
@@ -120,7 +125,6 @@
          */
         public function read($id) {
             if (is_numeric($id)) {
-
                 $this->id = (int)$id;
                 if ($this->r->execute()) {
                     $result = $this->r->get_result();
@@ -128,19 +132,14 @@
                         $obj = $result->fetch_object();
                         $this->strip($obj);
                         $ilove = new \Backend\Database\Schemas\ILove($obj->id, $obj->ilove, $obj->synced);
-
                         return $ilove;
                     }
                 }
             }
-
             return false;
         }
 
-        private function updateUnSyncedToSynced() {
-            $query = "UPDATE loveabout SET synced = 'true' WHERE synced = 'false';";
-            mysqli_query($this->connection, $query);
-        }
+
 
 
         /**
@@ -151,7 +150,7 @@
         public function update($obj) {
             if (is_object($obj) && is_numeric($obj->getId())) {
                 $this->id = (int)$obj->getId();
-                $oldData  = $this->read($this->id);
+                $oldData  = $this->read($obj->id);
 
                 if ($oldData !== false) {
                     $this->love = (is_null($obj->getLove())) ? $oldData->getLove() : $obj->getLove();

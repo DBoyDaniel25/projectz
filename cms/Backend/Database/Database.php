@@ -11,9 +11,10 @@
 
     class Database {
         const ENV = "local";
-        private $host, $user, $pass, $db;
         protected $jsonLocation;
         protected $connection, $c, $r, $u, $d;
+        private $host, $user, $pass, $db;
+
         /**
          * Database constructor.
          */
@@ -59,6 +60,16 @@
 
         }
 
+        /**
+         * Decodes encoded html from htmlentities() method no return value as objects are passed by reference
+         *
+         * @param $obj
+         */
+        public function htmlDecode($obj) {
+            foreach ($obj as $key => $value) {
+                $obj->$key = html_entity_decode($value);
+            }
+        }
 
         /**
          * Strip slashes added my mysqli_escape_query no return value as objects are passed by reference
@@ -68,18 +79,6 @@
         protected function strip($obj) {
             foreach ($obj as $key => $value) {
                 $obj->$key = stripcslashes($value);
-            }
-        }
-
-
-        /**
-         * Decodes encoded html from htmlentities() method no return value as objects are passed by reference
-         *
-         * @param $obj
-         */
-        public function htmlDecode($obj) {
-            foreach ($obj as $key => $value) {
-                $obj->$key = html_entity_decode($value);
             }
         }
 
@@ -95,7 +94,7 @@
         }
 
         protected function createJson($name, $data){
-            if(is_array($data)){
+            if ($data !== false && is_array($data)) {
                 $json = json_encode($data);
                 $handle = fopen($this->jsonLocation . $name, "w");
                 fwrite($handle, $json);
