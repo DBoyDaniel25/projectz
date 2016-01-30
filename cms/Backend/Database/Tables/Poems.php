@@ -77,50 +77,6 @@
         }
 
         /**
-         * Fetch one row
-         *
-         * @param $id
-         *
-         * @return \Backend\Database\Schemas\Poem|bool
-         */
-        public function read($id) {
-            if (is_numeric($id)) {
-                $this->id = (int)$id;
-                if ($this->r->execute()) {
-                    $result = $this->r->get_result();
-                    if ($result->num_rows > 0) {
-                        $obj = $result->fetch_object();
-                        $this->strip($obj);
-                        $poem = new Poem($obj->id, $obj->author, $obj->poemname,
-                            $obj->poem, $obj->date, $obj->favourite, $obj->synced, $obj->to_update);
-
-                        return $poem;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-        /**
-         * Deletes a row in database table
-         *
-         * @param $id
-         *
-         * @return bool True on success, false on failure
-         */
-        public function delete($id) {
-            if (is_numeric($id)) {
-                $this->id = (int)$id;
-                if ($this->d->execute()) {
-                    return $this->d->affected_rows > 0;
-                }
-            }
-
-            return false;
-        }
-
-        /**
          * Retrieve all rows
          *
          *
@@ -146,6 +102,32 @@
                 }
 
                 return $data;
+            }
+
+            return false;
+        }
+
+        /**
+         * Fetch one row
+         *
+         * @param $id
+         *
+         * @return \Backend\Database\Schemas\Poem|bool
+         */
+        public function read($id) {
+            if (is_numeric($id)) {
+                $this->id = (int)$id;
+                if ($this->r->execute()) {
+                    $result = $this->r->get_result();
+                    if ($result->num_rows > 0) {
+                        $obj = $result->fetch_object();
+                        $this->strip($obj);
+                        $poem = new Poem($obj->id, $obj->author, $obj->poemname,
+                            $obj->poem, $obj->date, $obj->favourite, $obj->synced, $obj->to_update);
+
+                        return $poem;
+                    }
+                }
             }
 
             return false;
@@ -178,12 +160,31 @@
         }
 
         /**
+         * Deletes a row in database table
+         *
+         * @param $id
+         *
+         * @return bool True on success, false on failure
+         */
+        public function delete($id) {
+            if (is_numeric($id)) {
+                $this->id = (int)$id;
+                if ($this->d->execute()) {
+                    return $this->d->affected_rows > 0;
+                }
+            }
+
+            return false;
+        }
+
+        /**
          * Updates all unsynced rows to synced
          */
         private function updateUnSyncedToSynced() {
             $query = "UPDATE poems SET synced = 'true' WHERE synced = 'false';";
             mysqli_query($this->connection, $query);
         }
+
 
         /**
          * Updates a row in database table
