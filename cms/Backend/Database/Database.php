@@ -28,10 +28,10 @@
                 $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/cms/Backend/api/json/";
             } else {
                 // for local development
-                $this->host = "localhost";
-                $this->user = "root";
-                $this->pass = "prince";
-                $this->db   = "projectz";
+                $this->host         = "localhost";
+                $this->user         = "root";
+                $this->pass         = "prince";
+                $this->db           = "mylove";
                 $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/versatile/projectz/cms/Backend/api/json/";
             }
 
