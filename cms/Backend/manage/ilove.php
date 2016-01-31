@@ -24,7 +24,7 @@
         $name = $_POST[\Backend\Database\Tables\ILove::LOVE];
         $id   = $_POST[\Backend\Database\Tables\ILove::ROW_ID];
 
-        $obj = new \Backend\Database\Schemas\ILove($id, $name);
+        $obj = new \Backend\Database\Schemas\ILove($id, $name, "true");
 
         $table = new \Backend\Database\Tables\ILove();
         if ($table->update($obj)) {

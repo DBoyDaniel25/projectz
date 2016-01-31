@@ -33,8 +33,8 @@
         $poem   = $_POST[Poems::POEM];
         $author = $_POST[Poems::AUTHOR];
         $id     = $_POST[Poems::ROW_ID];
-        $obj = new Poem($id, $author, $name, $poem, null, null, null, "true");
-        $table = new Poems();
+        $obj    = new Poem($id, $author, $name, $poem, null, null, "true", "true");
+        $table  = new Poems();
         if($table->update($obj)){
             echo "true";
         }else {

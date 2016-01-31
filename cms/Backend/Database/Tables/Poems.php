@@ -13,11 +13,18 @@
 
     class Poems extends Database {
 
-        const ROW_ID = "id";
-        const POEM = "poem";
-        const NAME = "name";
-        const AUTHOR = "author";
-        const JSON_NAME = "poems.json";
+        const ROW_ID     = "id";
+        const POEM       = "poem";
+        const NAME       = "name";
+        const AUTHOR     = "author";
+        const JSON_NAME  = "poems.json";
+        const TABLE_NAME = "poems";
+
+        // callback method for reading all poems entries
+        /**
+         * @var \Closure
+         */
+        private $callback;
 
         private $id;
         private $author;
@@ -46,6 +53,14 @@
             $this->r->bind_param("i", $this->id);
             $this->u->bind_param("ssssssi", $this->author, $this->name, $this->poem, $this->favourite, $this->synced, $this->toUpdate, $this->id);
             $this->d->bind_param("i", $this->id);
+
+
+            $this->callback = function ($tableObj) {
+                $poem = new Poem($tableObj->id, $tableObj->author, $tableObj->poemname, $tableObj->poem, $tableObj->date, $tableObj->favourite,
+                    $tableObj->synced, $tableObj->to_update);
+
+                return $poem;
+            };
         }
 
         /**
@@ -77,44 +92,31 @@
         }
 
         /**
-         * Retrieve all rows
-         *
-         *
-         * @param bool $decode Decode Data before receiving it
-         *
-         * @return \Backend\Database\Schemas\Poem[]|bool Array of poem objects, false on failure
+         * @param bool $decode
+         * @return \Backend\Database\Schemas\Poem[]|bool
          */
         public function readAll($decode = false) {
-            $query  = "SELECT * FROM poems ORDER BY id DESC;";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    if ($decode) {
-                        $this->htmlDecode($row);
-                    }
-
-                    $obj    = new Poem($row->id, $row->author, $row->poemname,
-                        $row->poem, $row->date, $row->favourite, $row->synced, $row->to_update);
-                    $data[] = $obj;
-                }
-
-                return $data;
-            }
-
-            return false;
+            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
         }
+
+
+        /**
+         * @return bool|Poem[]
+         */
+        public function readUnsynced() {
+            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+        }
+
 
         /**
          * Fetch one row
          *
          * @param $id
          *
-         * @return \Backend\Database\Schemas\Poem|bool
+         * @param callable $callback
+         * @return Poem|bool
          */
-        public function read($id) {
+        public function read($id, $callback) {
             if (is_numeric($id)) {
                 $this->id = (int)$id;
                 if ($this->r->execute()) {
@@ -122,9 +124,7 @@
                     if ($result->num_rows > 0) {
                         $obj = $result->fetch_object();
                         $this->strip($obj);
-                        $poem = new Poem($obj->id, $obj->author, $obj->poemname,
-                            $obj->poem, $obj->date, $obj->favourite, $obj->synced, $obj->to_update);
-
+                        $poem = $callback($obj);
                         return $poem;
                     }
                 }
@@ -133,31 +133,6 @@
             return false;
         }
 
-        /**
-         * Retrieve all unsynced rows
-         *
-         *
-         *
-         * @return \Backend\Database\Schemas\Poem[]|bool Array of poem objects, false on failure
-         */
-        public function readUnsynced() {
-            $query  = "SELECT * FROM poems WHERE synced = 'false' ORDER BY id DESC;";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    $this->htmlDecode($row);
-                    $obj    = new Poem($row->id, $row->author, $row->poemname,
-                        $row->poem, $row->date, $row->favourite, $row->synced, $row->to_update);
-                    $data[] = $obj;
-                }
-                $this->updateUnSyncedToSynced();
-                return $data;
-            }
-            return false;
-        }
 
         /**
          * Deletes a row in database table
@@ -177,14 +152,6 @@
             return false;
         }
 
-        /**
-         * Updates all unsynced rows to synced
-         */
-        private function updateUnSyncedToSynced() {
-            $query = "UPDATE poems SET synced = 'true' WHERE synced = 'false';";
-            mysqli_query($this->connection, $query);
-        }
-
 
         /**
          * Updates a row in database table
@@ -197,7 +164,7 @@
             if (is_numeric($obj->getId()) && is_object($obj)) {
                 $this->id = (int)$obj->getId();
 
-                $oldData = $this->read($this->id);
+                $oldData = $this->read($this->id, $this->callback);
 
                 if ($oldData !== false) {
 

@@ -19,6 +19,6 @@
         if ($data !== false) {
             $email = new Email("MyLove Data Synced", ILove::JSON_NAME);
             $email->send();
+            header("Location: ../json/" . ILove::JSON_NAME);
         }
-        header("Location: ../json/" . ILove::JSON_NAME);
     }

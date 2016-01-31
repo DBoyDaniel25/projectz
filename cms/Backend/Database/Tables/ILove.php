@@ -12,12 +12,19 @@
     use Backend\Database\Database;
 
     class ILove extends Database {
-        const JSON_NAME = "ilove.json";
-        const LOVE = "ilove";
-        const ROW_ID = "id";
+        const JSON_NAME  = "ilove.json";
+        const LOVE       = "ilove";
+        const ROW_ID     = "id";
+        const TABLE_NAME = "loveabout";
+
         private $id;
         private $love;
         private $synced;
+
+        /**
+         * @var \Closure
+         */
+        private $callback;
 
         public function __construct() {
             parent::__construct();
@@ -32,6 +39,14 @@
             $this->r->bind_param("i", $this->id);
             $this->u->bind_param("si", $this->love, $this->id);
             $this->d->bind_param("i", $this->id);
+
+
+            $this->callback = function ($tableObj) {
+                $love = new \Backend\Database\Schemas\ILove($tableObj->id,
+                    $tableObj->ilove, $tableObj->synced);
+
+                return $love;
+            };
         }
 
         /**
@@ -66,64 +81,30 @@
             return false;
         }
 
+
+        /**
+         * @return \Backend\Database\Schemas\ILove[]|bool
+         */
+        public function readUnsynced() {
+            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+        }
+
         /**
          * @param bool $decode
-         *
          * @return \Backend\Database\Schemas\ILove[]|bool
          */
         public function readAll($decode = false) {
-            $query  = "SELECT * FROM loveabout ORDER BY id DESC;";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    if ($decode) {
-                        $this->htmlDecode($row);
-                    }
-
-                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
-                    $data[] = $obj;
-                }
-
-                return $data;
-            }
-
-            return false;
+            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
         }
 
-        public function readUnsynced() {
-            $query  = "SELECT * FROM loveabout WHERE synced = 'false' ORDER BY id DESC;";
-            $result = mysqli_query($this->connection, $query);
-
-            if (mysqli_num_rows($result) > 0) {
-                $data = [];
-                while ($row = mysqli_fetch_object($result)) {
-                    $this->strip($row);
-                    $this->htmlDecode($row);
-                    $obj    = new \Backend\Database\Schemas\ILove($row->id, $row->ilove, $row->synced);
-                    $data[] = $obj;
-                }
-                $this->updateUnSyncedToSynced();
-
-                return $data;
-            }
-
-            return false;
-        }
-
-        private function updateUnSyncedToSynced() {
-            $query = "UPDATE loveabout SET synced = 'true' WHERE synced = 'false';";
-            mysqli_query($this->connection, $query);
-        }
 
         /**
          * @param $id
          *
+         * @param callable $callback
          * @return \Backend\Database\Schemas\ILove|bool
          */
-        public function read($id) {
+        public function read($id, $callback) {
             if (is_numeric($id)) {
                 $this->id = (int)$id;
                 if ($this->r->execute()) {
@@ -131,15 +112,15 @@
                     if ($result->num_rows > 0) {
                         $obj = $result->fetch_object();
                         $this->strip($obj);
-                        $ilove = new \Backend\Database\Schemas\ILove($obj->id, $obj->ilove, $obj->synced);
+                        $ilove = $callback($obj);
+
                         return $ilove;
                     }
                 }
             }
+
             return false;
         }
-
-
 
 
         /**
@@ -150,11 +131,9 @@
         public function update($obj) {
             if (is_object($obj) && is_numeric($obj->getId())) {
                 $this->id = (int)$obj->getId();
-                $oldData  = $this->read($obj->id);
-
+                $oldData  = $this->read($obj->id, $this->callback);
                 if ($oldData !== false) {
                     $this->love = (is_null($obj->getLove())) ? $oldData->getLove() : $obj->getLove();
-
                     if ($this->u->execute()) {
                         return true;
                     }
@@ -163,6 +142,4 @@
 
             return false;
         }
-
-
     }
