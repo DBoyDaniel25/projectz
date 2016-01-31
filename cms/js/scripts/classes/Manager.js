@@ -15,7 +15,7 @@ var Manager = function (processFile) {
     // prod:  http://myprincess.esy.es/cms/
     if(ENV === "local"){
         // production
-        this.hostName = "http://localhost/versatile/projectz/cms/";
+        this.hostName = "http://localhost/web/projectz/cms/";
     }else {
         // local
         this.hostName = "http://myprincess.esy.es/cms/";

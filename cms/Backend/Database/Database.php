@@ -32,7 +32,7 @@
                 $this->user         = "root";
                 $this->pass         = "prince";
                 $this->db           = "mylove";
-                $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/versatile/projectz/cms/Backend/api/json/";
+                $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/web/projectz/cms/Backend/api/json/";
             }
 
             $this->connection = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
