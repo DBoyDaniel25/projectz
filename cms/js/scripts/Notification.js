@@ -1,24 +1,25 @@
 /**
  * Created by prince on 12/9/15.
  */
-var Notification = function () {
+var Notify = function () {
 
 };
 
 /**
  * Creates and Error Message, displays message if text is set
- * @returns {Notification}
+ * @returns {Notify}
  */
-Notification.prototype.error = function (text) {
-
+Notify.prototype.error = function (body, title) {
+    var titleText = title || "Error";
+    $.Notification.autoHideNotify('error', 'top right', titleText, body);
     return this;
 };
 
 /**
  * Creates Info Message, displays message if text is set
- * @returns {Notification}
+ * @returns {Notify}
  */
-Notification.prototype.info = function (body, title) {
+Notify.prototype.info = function (body, title) {
     var titleText = title || "Information";
     $.Notification.autoHideNotify('info', 'top right', titleText, body);
     return this;
@@ -26,42 +27,17 @@ Notification.prototype.info = function (body, title) {
 
 /**
  * Creates a Success Message, displays message if text is set
- * @returns {Notification}
+ * @returns {Notify}
  */
-Notification.prototype.success = function (text) {
-
+Notify.prototype.success = function (body, title) {
+    var titleText = title || "Success";
+    $.Notification.autoHideNotify('success', 'top right', titleText, body);
     return this;
 };
 
-/**
- * Sets a loading bar
- * @param msg Message to show as loading text
- */
-Notification.prototype.processing = function (msg) {
 
-};
-
-/**
- * Clears processing icon
- * @param func Callback function
- */
-Notification.prototype.clearProcessing = function (func) {
-
-};
-
-/**
- * Sets the text of the notification
- * @param text
- */
-Notification.prototype.text = function (text) {
-
-};
-
-/**
- * Hides the notification
- * @returns {Notification}
- */
-Notification.prototype.hide = function () {
-
+Notify.prototype.confirmDelete = function (body, title, cb) {
+    var titleText = title || "Hold On!";
+    $.Notification.confirm('error','center', titleText, body, cb);
     return this;
 };

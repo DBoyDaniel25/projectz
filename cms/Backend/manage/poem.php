@@ -9,7 +9,7 @@
     use Backend\Database\Schemas\Poem;
     use Backend\Database\Tables\Poems;
 
-    include "../../../vendor/autoload.php";
+    include "../../vendor/autoload.php";
     if (isset($_POST["create"])) {
         $name   = $_POST[Poems::NAME];
         $poem   = $_POST[Poems::POEM];

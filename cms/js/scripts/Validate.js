@@ -18,5 +18,5 @@ Validate.prototype.isFieldsEmpty = function (obj) {
 };
 
 Validate.prototype.resetForm = function () {
-    document.querySelector("form").reset();
+    document.querySelector("[role='form']").reset();
 };

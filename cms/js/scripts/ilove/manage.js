@@ -3,7 +3,7 @@
  */
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("ilove.php"),
-    notif     = new Notification(),
+    notif     = new Notify(),
     validate  = new Validate(),
     ilove;
 

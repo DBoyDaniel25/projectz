@@ -33,7 +33,7 @@ var editBtn      = document.querySelectorAll(".edit"),
                 "delete": "delete",
                 id      : rowId
             },
-            notif = new Notification();
+            notif = new Notify();
 
         manage.performDelete(notif, data);
     };
@@ -55,7 +55,7 @@ closeIcon.addEventListener("click", closeMethod, false);
 var inputs    = document.querySelectorAll("input"),
     textAreas = document.querySelectorAll("textarea"),
     onType    = function () {
-        var notif = new Notification();
+        var notif = new Notify();
         notif.hide();
     };
 

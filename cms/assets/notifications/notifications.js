@@ -65,13 +65,13 @@
                 showAnimation : "show",
                 showDuration  : 0,
                 hideDuration  : 0,
-                autoHideDelay : 5000,
+                autoHideDelay : 10000,
                 autoHide      : true,
                 clickToHide   : true
             });
         },
         //confirmation notification
-        Notification.prototype.confirm = function (style, position, title) {
+        Notification.prototype.confirm = function (style, position, title, text, callback) {
             var icon = "fa fa-adjust";
             if (style == "error") {
                 icon = "fa fa-exclamation";
@@ -86,7 +86,7 @@
             }
             $.notify({
                 title: title,
-                text : 'Are you sure you want to do nothing?<div class="clearfix"></div><br><a class="btn btn-sm btn-default yes">Yes</a> <a class="btn btn-sm btn-danger no">No</a>',
+                text : text + '<div class="clearfix"></div><br><a class="btn btn-sm btn-default yes">Yes</a><a class="btn btn-sm btn-danger no">No</a>',
                 image: "<i class='" + icon + "'></i>"
             }, {
                 style         : 'metro',
@@ -104,8 +104,8 @@
                 $(this).trigger('notify-hide');
             });
             $(document).on('click', '.notifyjs-metro-base .yes', function () {
-                //show button text
-                alert($(this).text() + " clicked!");
+                //callback when user clicks
+                callback();
                 //hide notification
                 $(this).trigger('notify-hide');
             });

@@ -5,7 +5,7 @@
      * Date: 1/27/16
      * Time: 11:58 AM
      */
-    include "../../../vendor/autoload.php";
+    include "../../vendor/autoload.php";
     if (isset($_POST["create"])) {
         $name = $_POST[\Backend\Database\Tables\ILove::LOVE];
 
