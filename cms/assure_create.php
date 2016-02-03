@@ -1,4 +1,15 @@
-
+<?php
+    /**
+     * Created by PhpStorm.
+     * User: evolutionarycoder
+     * Date: 2/3/16
+     * Time: 4:58 PM
+     */
+    include "vendor/autoload.php";
+    session_start();
+    if (!isset($_SESSION["user_id"])) {
+        header("Location: ../index.php");
+    }
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,14 +149,14 @@
                         </li>
                         <li class="hidden-xs">
                             <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i
-                                    class="md md-crop-free"></i></a>
+                                        class="md md-crop-free"></i></a>
                         </li>
                         <li class="hidden-xs">
                             <a href="#" class="right-bar-toggle waves-effect waves-light"><i class="md md-chat"></i></a>
                         </li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img
-                                    src="images/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                                        src="images/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
                                 <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>

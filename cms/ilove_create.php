@@ -1,3 +1,15 @@
+<?php
+    /**
+     * Created by PhpStorm.
+     * User: evolutionarycoder
+     * Date: 2/3/16
+     * Time: 4:58 PM
+     */
+    include "vendor/autoload.php";
+    session_start();
+    if (!isset($_SESSION["user_id"])) {
+        header("Location: ../index.php");
+    }
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +50,9 @@
     <script src="js/modernizr.min.js"></script>
 
     <!-- Daniel's CSS -->
+    
 
+    
 
 </head>
 
@@ -135,14 +149,14 @@
                         </li>
                         <li class="hidden-xs">
                             <a href="#" id="btn-fullscreen" class="waves-effect waves-light"><i
-                                    class="md md-crop-free"></i></a>
+                                        class="md md-crop-free"></i></a>
                         </li>
                         <li class="hidden-xs">
                             <a href="#" class="right-bar-toggle waves-effect waves-light"><i class="md md-chat"></i></a>
                         </li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img
-                                    src="images/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
+                                        src="images/avatar-1.jpg" alt="user-img" class="img-circle"> </a>
                             <ul class="dropdown-menu">
                                 <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profile</a></li>
                                 <li><a href="javascript:void(0)"><i class="md md-settings"></i> Settings</a></li>
@@ -161,87 +175,87 @@
 
     <!-- ========== Left Sidebar Start ========== -->
     <div class="left side-menu">
-        <div class="sidebar-inner slimscrollleft">
-            <div class="user-details">
-                <div class="pull-left">
-                    <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
-                </div>
-                <div class="user-info">
-                    <div class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">John Doe <span
+    <div class="sidebar-inner slimscrollleft">
+        <div class="user-details">
+            <div class="pull-left">
+                <img src="images/users/avatar-1.jpg" alt="" class="thumb-md img-circle">
+            </div>
+            <div class="user-info">
+                <div class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">John Doe <span
                                 class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><i class="md md-face-unlock"></i> Profile
-                                    <div class="ripple-wrapper"></div>
-                                </a></li>
-                            <li><a href="#"><i class="md md-settings"></i> Settings</a></li>
-                            <li><a href="#"><i class="md md-lock"></i> Lock screen</a></li>
-                            <li><a href="#"><i class="md md-settings-power"></i> Logout</a></li>
-                        </ul>
-                    </div>
-
-                    <p class="text-muted m-0">Administrator</p>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><i class="md md-face-unlock"></i> Profile
+                                <div class="ripple-wrapper"></div>
+                            </a></li>
+                        <li><a href="#"><i class="md md-settings"></i> Settings</a></li>
+                        <li><a href="#"><i class="md md-lock"></i> Lock screen</a></li>
+                        <li><a href="#"><i class="md md-settings-power"></i> Logout</a></li>
+                    </ul>
                 </div>
+
+                <p class="text-muted m-0">Administrator</p>
             </div>
-            <!--- Divider -->
-            <div id="sidebar-menu">
-                <ul>
-                    <li>
-                        <a href="index.php" class="waves-effect"><i class="md md-home"></i><span> Dashboard </span></a>
-                    </li>
+        </div>
+        <!--- Divider -->
+        <div id="sidebar-menu">
+            <ul>
+                <li>
+                    <a href="index.php" class="waves-effect"><i class="md md-home"></i><span> Dashboard </span></a>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="fa fa-heart"></i><span> Poems </span><span
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-heart"></i><span> Poems </span><span
                                 class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="poem_create.php">Create</a></li>
-                            <li><a href="poem_edit.php">Edit</a></li>
-                        </ul>
-                    </li>
+                    <ul class="list-unstyled">
+                        <li><a href="poem_create.php">Create</a></li>
+                        <li><a href="poem_edit.php">Edit</a></li>
+                    </ul>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="fa fa-heartbeat"></i><span> ILove </span><span
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-heartbeat"></i><span> ILove </span><span
                                 class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="ilove_create.php">Create</a></li>
-                            <li><a href="ilove_edit.php">Edit</a></li>
-                        </ul>
-                    </li>
+                    <ul class="list-unstyled">
+                        <li><a href="ilove_create.php">Create</a></li>
+                        <li><a href="ilove_edit.php">Edit</a></li>
+                    </ul>
+                </li>
 
 
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="fa fa-smile-o"></i><span> Reassurance </span><span
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-smile-o"></i><span> Reassurance </span><span
                                 class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="assure_create.php">Create</a></li>
-                            <li><a href="assure_edit.php">Edit</a></li>
-                        </ul>
-                    </li>
+                    <ul class="list-unstyled">
+                        <li><a href="assure_create.php">Create</a></li>
+                        <li><a href="assure_edit.php">Edit</a></li>
+                    </ul>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="fa fa-venus-mars"></i><span> Promise </span><span
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-venus-mars"></i><span> Promise </span><span
                                 class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="promise_create.php">Create</a></li>
-                            <li><a href="promise_edit.php">Edit</a></li>
-                        </ul>
-                    </li>
+                    <ul class="list-unstyled">
+                        <li><a href="promise_create.php">Create</a></li>
+                        <li><a href="promise_edit.php">Edit</a></li>
+                    </ul>
+                </li>
 
-                    <li class="has_sub">
-                        <a href="#" class="waves-effect"><i class="fa fa-clock-o"></i><span> Memory </span><span
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-clock-o"></i><span> Memory </span><span
                                 class="pull-right"><i class="md md-add"></i></span></a>
-                        <ul class="list-unstyled">
-                            <li><a href="memory_create.php">Create</a></li>
-                            <li><a href="memory_edit.php">Edit</a></li>
-                        </ul>
-                    </li>
+                    <ul class="list-unstyled">
+                        <li><a href="memory_create.php">Create</a></li>
+                        <li><a href="memory_edit.php">Edit</a></li>
+                    </ul>
+                </li>
 
-                </ul>
-                <div class="clearfix"></div>
-            </div>
+            </ul>
             <div class="clearfix"></div>
         </div>
+        <div class="clearfix"></div>
     </div>
+</div>
     <!-- Left Sidebar End -->
 
 
@@ -257,8 +271,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">
-
-                            Create a ILove
+                            
+    Create a ILove
 
                         </h4>
                         <ol class="breadcrumb pull-right">
@@ -269,28 +283,29 @@
                     </div>
                 </div>
 
+                
+    
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">Create</h3></div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">ILove</label>
+                        <div class="col-md-10">
+                            <input type="text" class="form-control" placeholder="I love your...">
+                        </div>
+                    </div>
+                    <button type="button"
+                            class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Submit
+                    </button>
+                </form>
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+</div>
 
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Create</h3></div>
-                            <div class="panel-body">
-                                <form class="form-horizontal" role="form">
-                                    <div class="form-group">
-                                        <label class="col-md-2 control-label">ILove</label>
-                                        <div class="col-md-10">
-                                            <input type="text" class="form-control" placeholder="I love your...">
-                                        </div>
-                                    </div>
-                                    <button type="button"
-                                            class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">
-                                        Submit
-                                    </button>
-                                </form>
-                            </div> <!-- panel-body -->
-                        </div> <!-- panel -->
-                    </div> <!-- col -->
-                </div>
 
 
             </div> <!-- container -->
@@ -442,6 +457,9 @@
 <script src="js/jquery.app.js"></script>
 
 <!-- Daniel's Scripts -->
+
+
+
 
 
 </body>

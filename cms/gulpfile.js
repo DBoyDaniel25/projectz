@@ -2,6 +2,7 @@ var gulp         = require("gulp"),
     render       = require("gulp-nunjucks-render"),
     ext_replace  = require("gulp-ext-replace"),
     minify_js = require("gulp-uglify"),
+    csso = require("gulp-csso"),
     baseTemplate = "./template/",
     template     = {
         source: [
@@ -14,6 +15,9 @@ var gulp         = require("gulp"),
     js = {
         myscripts : "./js/scripts/**/*.*",
         vendor : "./js/*.js"
+    },
+    css = {
+        vendor : "./css/**/*.css"
     };
 
 gulp.task("render", function () {
@@ -25,8 +29,20 @@ gulp.task("render", function () {
 });
 
 
-gulp.task("minify-js", function(){
+gulp.task("minify-vendor-js", function(){
     return gulp.src(js.vendor)
         .pipe(minify_js())
-        .pipe(gulp.dest('./js/'));
+        .pipe(gulp.dest('./js/'))
+});
+
+gulp.task("minify-vendor-css", function(){
+    return gulp.src(css.vendor)
+        .pipe(csso())
+        .pipe(gulp.dest('./css/'))
+});
+
+gulp.task("minify-my-js", function(){
+    return gulp.src(js.myscripts)
+        .pipe(minify_js())
+        .pipe(gulp.dest('./js/scripts/'));
 });
