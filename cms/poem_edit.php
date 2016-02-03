@@ -287,19 +287,19 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Name</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="Poem Name">
+                            <input type="text" id="name" class="form-control" placeholder="Poem Name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Poem</label>
                         <div class="col-md-10">
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" id="poem" rows="5"></textarea>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-md-2 control-label">Author</label>
                         <div class="col-md-3">
-                            <input type="text" class="form-control" placeholder="Daniel Prince" value="Daniel Prince">
+                            <input type="text" id="author" class="form-control" placeholder="Daniel Prince" value="Daniel Prince">
                         </div>
                     </div>
                     <button type="button" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Update</button>
@@ -499,6 +499,11 @@
 <script src="js/jquery.app.js"></script>
 
 <!-- Daniel's Scripts -->
+<script src="js/scripts/classes/Manager.js"></script>
+<script src="js/scripts/classes/Structure.js"></script>
+<script src="js/scripts/Ajaxify.js"></script>
+<script src="js/scripts/Notification.js"></script>
+<script src="js/scripts/Validate.js"></script>
 
 
 

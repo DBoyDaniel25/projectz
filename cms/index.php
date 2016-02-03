@@ -521,6 +521,11 @@
 <script src="js/jquery.app.js"></script>
 
 <!-- Daniel's Scripts -->
+<script src="js/scripts/classes/Manager.js"></script>
+<script src="js/scripts/classes/Structure.js"></script>
+<script src="js/scripts/Ajaxify.js"></script>
+<script src="js/scripts/Notification.js"></script>
+<script src="js/scripts/Validate.js"></script>
 
     <!-- Counter-up -->
     <script src="assets/counterup/waypoints.min.js" type="text/javascript"></script>

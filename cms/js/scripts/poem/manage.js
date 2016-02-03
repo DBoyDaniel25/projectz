@@ -16,7 +16,8 @@ if (submitBtn) {
             notif.error("Please fill in all fields");
             return;
         }
-        manage.performCreate(notif, data);
+        console.log(data);
+        //manage.performCreate(notif, data);
     }, false);
 } else {
     var updateBtn = document.querySelector("#update");
