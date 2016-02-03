@@ -442,6 +442,10 @@
 <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
 <script src="assets/jquery-blockui/jquery.blockUI.js"></script>
 
+<!-- Notifications -->
+<script src="assets/notifications/notify.min.js"></script>
+<script src="assets/notifications/notify-metro.js"></script>
+<script src="assets/notifications/notifications.js"></script>
 
 <!-- CUSTOM JS -->
 <script src="js/jquery.app.js"></script>

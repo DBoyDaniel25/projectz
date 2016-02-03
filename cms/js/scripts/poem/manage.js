@@ -11,12 +11,13 @@ if (submitBtn) {
     poem = new Poem("name", "poem", "author");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        var data = poem.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
-            notif.error("Please fill in all fields");
-            return;
-        }
-        console.log(data);
+        notif.info("hello");
+        //var data = poem.getFormValues().getValues();
+        //if (validate.isFieldsEmpty(data)) {
+        //    //notif.error("Please fill in all fields");
+        //    return;
+        //}
+        //console.log(data);
         //manage.performCreate(notif, data);
     }, false);
 } else {
@@ -24,11 +25,11 @@ if (submitBtn) {
     poem          = new Poem("id", "name", "poem", "author");
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        var data = poem.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
-            notif.error("Please fill in all fields");
-            return;
-        }
-        manage.performUpdate(notif, data, poem.updateTable);
+        //var data = poem.getFormValues(true).getValues();
+        //if (validate.isFieldsEmpty(data)) {
+        //    notif.error("Please fill in all fields");
+        //    return;
+        //}
+        //manage.performUpdate(notif, data, poem.updateTable);
     }, false)
 }
