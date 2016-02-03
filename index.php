@@ -1,3 +1,15 @@
+<?php
+    session_start();
+    if(isset($_POST["pass"])){
+        $pass = $_POST["pass"];
+        $user = $_POST["user"];
+        if($user === "daniel.prince" && $pass === "mylove"){
+            $_SESSION["user_id"] = 1;
+            header("Location: cms/index.php");
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -50,17 +62,19 @@
 
 
         <div class="panel-body">
-            <form class="form-horizontal m-t-20" action="index.php">
+            <form class="form-horizontal m-t-20" method="post" action="index.php">
 
                 <div class="form-group ">
                     <div class="col-xs-12">
-                        <input class="form-control input-lg " type="text" required="" placeholder="Username">
+                        <input name="user" class="form-control input-lg " type="text" required=""
+                               placeholder="Username">
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control input-lg" type="password" required="" placeholder="Password">
+                        <input name="pass" class="form-control input-lg" type="password" required=""
+                               placeholder="Password">
                     </div>
                 </div>
 
@@ -78,8 +92,7 @@
 
                 <div class="form-group text-center m-t-40">
                     <div class="col-xs-12">
-                        <button class="btn btn-primary btn-lg w-lg waves-effect waves-light" type="submit">Log In
-                        </button>
+                        <button name="submit" class="btn btn-primary btn-lg w-lg waves-effect waves-light" type="submit">Log In</button>
                     </div>
                 </div>
 

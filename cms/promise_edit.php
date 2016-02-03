@@ -11,6 +11,7 @@
         header("Location: ../index.php");
     }
     ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -289,7 +290,7 @@
 <div class="row">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Create</h3></div>
+            <div class="panel-heading"><h3 class="panel-title">Update</h3></div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -298,9 +299,7 @@
                             <input type="text" class="form-control" placeholder="I promise...">
                         </div>
                     </div>
-                    <button type="button"
-                            class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Submit
-                    </button>
+                    <button type="button" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Update</button>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->

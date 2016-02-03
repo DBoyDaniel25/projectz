@@ -11,6 +11,7 @@
         header("Location: ../index.php");
     }
     ?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -298,9 +299,7 @@
                             <input type="text" class="form-control" placeholder="I love your...">
                         </div>
                     </div>
-                    <button type="button"
-                            class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Submit
-                    </button>
+                    <button type="button" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Create</button>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->
