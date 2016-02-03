@@ -1,116 +1,120 @@
-<?php
-    include "vendor/autoload.php";
-    session_start();
-    if (isset($_POST["submit"])) {
-        if (!empty($_POST["username"]) && !empty($_POST["password"])) {
-            if($_POST["username"] === "daniel.prince" && $_POST["password"] === "zipporah.mylove"){
-                $_SESSION["user"] = "prince";
-                header("Location: cms/poem.php");
-            }
-        }
-    }
-?>
-    <!doctype html>
-    <html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
+    <meta name="author" content="Coderthemes">
 
-        <head>
-            <meta charset="utf-8"/>
-            <title>Dashboard I Admin Panel</title>
+    <link rel="shortcut icon" href="cms/images/favicon_1.ico">
 
-            <link rel="stylesheet" href="cms/css/layout.css" type="text/css" media="screen"/>
-            <!--[if lt IE 9]>
-            <link rel="stylesheet" href="cms/css/ie.css" type="text/css" media="screen"/>
-            <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-            <![endif]-->
+    <title>My Love</title>
 
-            <script src="cms/js/vendors/jquery-1.5.2.min.js" type="text/javascript"></script>
-            <script src="cms/js/vendors/hideshow.js" type="text/javascript"></script>
-            <style>
-                body {
-                    background-color : #DEDEE1;
-                }
+    <!-- Base Css Files -->
+    <link href="cms/css/bootstrap.min.css" rel="stylesheet"/>
 
-                .login-form {
-                    position  : absolute;
-                    top       : 30%;
-                    left      : 50%;
-                    transform : translate(-50%, -50%);
-                }
+    <!-- Font Icons -->
+    <link href="cms/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+    <link href="cms/assets/ionicon/css/ionicons.min.css" rel="stylesheet"/>
+    <link href="cms/css/material-design-iconic-font.min.css" rel="stylesheet">
 
-                #main {
-                    width            : 100% !important;
-                    height           : 100% !important;
-                    background-color : #DEDEE1;
-                }
+    <!-- animate css -->
+    <link href="cms/css/animate.css" rel="stylesheet"/>
 
-                label {
-                    width : 100% !important;
-                }
+    <!-- Waves-effect -->
+    <link href="cms/css/waves-effect.css" rel="stylesheet">
 
-                input[type="text"] {
-                    width : 230px !important;
-                }
+    <!-- Custom Files -->
+    <link href="cms/css/helper.css" rel="stylesheet" type="text/css"/>
+    <link href="cms/css/style.css" rel="stylesheet" type="text/css"/>
 
-                .width_half {
-                    float     : none;
-                    position  : relative;
-                    left      : 50%;
-                    transform : translateX(-50%);
-                }
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 
-                form > fieldset {
-                    text-align : center;
-                }
+    <script src="js/modernizr.min.js"></script>
 
-                form fieldset label {
-                    text-align : left;
-                }
-            </style>
-
-            <link rel="stylesheet" href="cms/css/general.css">
+</head>
+<body>
 
 
-        </head>
+<div class="wrapper-page">
+    <div class="panel panel-color panel-primary panel-pages">
+        <div class="panel-heading bg-img">
+            <div class="bg-overlay"></div>
+            <h3 class="text-center m-t-10 text-white"> Sign In to <strong>My Love</strong></h3>
+        </div>
 
 
-        <body>
+        <div class="panel-body">
+            <form class="form-horizontal m-t-20" action="index.php">
 
-
-            <header id="header" style="text-align: center">
-                <hgroup>
-                    <h2 style="width: 100%" class="section_title">My Love</h2>
-
-                    <div class="clear"></div>
-                </hgroup>
-            </header> <!-- end of header bar -->
-
-            <section id="main" class="column">
-
-
-                <div class="login-form">
-                    <article class="module" style="margin: 0">
-                        <header><h3>Sign In</h3></header>
-                        <div class="module_content">
-                            <form action="index.php" method="post">
-                                <fieldset class="width_half">
-                                    <label>Username</label>
-                                    <input type="text" name="username">
-                                </fieldset>
-                                <fieldset class="width_half">
-                                    <label>Password</label>
-                                    <input name="password" type="password">
-                                </fieldset>
-                                <div class="clear"></div>
-                                <input value="Sign in" name="submit" class="alt_btn width_half" type="submit">
-                            </form>
-                        </div>
-                    </article>
-                    <div class="clear"></div>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <input class="form-control input-lg " type="text" required="" placeholder="Username">
+                    </div>
                 </div>
 
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control input-lg" type="password" required="" placeholder="Password">
+                    </div>
+                </div>
 
-            </section>
+                <div class="form-group ">
+                    <div class="col-xs-12">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox-signup" type="checkbox">
+                            <label for="checkbox-signup">
+                                Remember me
+                            </label>
+                        </div>
 
-        </body>
+                    </div>
+                </div>
 
-    </html>
+                <div class="form-group text-center m-t-40">
+                    <div class="col-xs-12">
+                        <button class="btn btn-primary btn-lg w-lg waves-effect waves-light" type="submit">Log In
+                        </button>
+                    </div>
+                </div>
+
+                <div class="form-group m-t-30">
+                    <div class="col-sm-7">
+                        <a href="recoverpw.php"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
+                    </div>
+                    <div class="col-sm-5 text-right">
+                        <a href="register.php">Create an account</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+<script>
+    var resizefunc = [];
+</script>
+<script src="cms/js/jquery.min.js"></script>
+<script src="cms/js/bootstrap.min.js"></script>
+<script src="cms/js/waves.js"></script>
+<script src="cms/js/wow.min.js"></script>
+<script src="cms/js/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cms/js/jquery.scrollTo.min.js"></script>
+<script src="cms/assets/jquery-detectmobile/detect.js"></script>
+<script src="cms/assets/fastclick/fastclick.js"></script>
+<script src="cms/assets/jquery-slimscroll/jquery.slimscroll.js"></script>
+<script src="cms/assets/jquery-blockui/jquery.blockUI.js"></script>
+
+
+<!-- CUSTOM JS -->
+<script src="js/jquery.app.js"></script>
+
+</body>
+</html>

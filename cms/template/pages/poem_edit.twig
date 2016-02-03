@@ -1,0 +1,49 @@
+{% extends "base.twig" %}
+
+{% block page_title %}
+    Edit Poems
+{% endblock %}
+
+{% block content %}
+    {# poem form#}
+    {% include 'poem_form.twig' %}
+
+    {# Table #}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <h3>Poems</h3>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped" id="datatable-editable">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Poem</th>
+                    <th>Date</th>
+                    <th>Author</th>
+                    <th>Synced</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="gradeX">
+                    <td>Trident</td>
+                    <td>Internet Explorer 4.0</td>
+                    <td>Win 95+</td>
+                    <td>Five</td>
+                    <td>True</td>
+                    <td class="actions">
+                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
+                        <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <!-- end: page -->
+    </div>
+{% endblock %}

@@ -13,7 +13,7 @@
         const ENV = "local";
         protected $jsonLocation;
         protected $connection, $c, $r, $u, $d;
-        private $host, $user, $pass, $db;
+        private   $host, $user, $pass, $db;
 
         /**
          * Database constructor.
@@ -21,10 +21,10 @@
         public function __construct() {
             if (self::ENV !== "local") {
                 // for production
-                $this->host = "mysql.hostinger.in";
-                $this->user = "u288716392_dp";
-                $this->pass = "starboi25";
-                $this->db   = "u288716392_love";
+                $this->host         = "mysql.hostinger.in";
+                $this->user         = "u288716392_dp";
+                $this->pass         = "starboi25";
+                $this->db           = "u288716392_love";
                 $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/cms/Backend/api/json/";
             } else {
                 // for local development
@@ -65,8 +65,9 @@
          *
          *
          *
-         * @param string $tableName The table to query
-         * @param callable $callback A function which returns a database schema object of the table passed in, in the first parameter, where a mysql object of that table will be passed into it
+         * @param string   $tableName The table to query
+         * @param callable $callback  A function which returns a database schema object of the table
+         *                            passed in, in the first parameter, where a mysql object of                                          that table will be passed into it
          *
          * @return object[]|bool Array of poem objects, false on failure
          */
@@ -83,10 +84,8 @@
                     $data[] = $obj;
                 }
                 $this->updateUnSyncedToSynced($tableName);
-
                 return $data;
             }
-
             return false;
         }
 
@@ -114,6 +113,7 @@
 
         /**
          * Updates all unsynced rows to synced
+         *
          * @param string $tableName The table name to update
          */
         private function updateUnSyncedToSynced($tableName) {
@@ -122,10 +122,11 @@
         }
 
         /**
-         * @param bool $decode
+         * @param bool     $decode
          *
-         * @param $tableName
+         * @param          $tableName
          * @param callable $callback
+         *
          * @return object[]|bool
          */
         public function readAll($decode = false, $tableName, $callback) {
@@ -160,13 +161,13 @@
             return htmlentities(trim(mysqli_real_escape_string($this->connection, $str)));
         }
 
-        protected function createJson($name, $data){
+        protected function createJson($name, $data) {
             if ($data !== false && is_array($data)) {
-                $json = json_encode($data);
+                $json   = json_encode($data);
                 $handle = fopen($this->jsonLocation . $name, "w");
                 fwrite($handle, $json);
                 fclose($handle);
-            }else {
+            } else {
                 $handle = fopen($this->jsonLocation . $name, "w");
                 fwrite($handle, "");
                 fclose($handle);

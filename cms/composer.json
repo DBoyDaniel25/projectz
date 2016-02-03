@@ -1,0 +1,15 @@
+{
+    "name": "prince/projectz",
+    "authors": [
+        {
+            "name": "Daniel M. Prince",
+            "email": "programmer96@hotmail.com"
+        }
+    ],
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Backend\\": "./Backend/"
+        }
+    }
+}

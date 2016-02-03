@@ -87,7 +87,7 @@
          * @param string $sender
          */
         public function setSender($sender) {
-            $this->sender = $sender;
+            $this->sender = "From: " . $sender;
         }
 
     }
