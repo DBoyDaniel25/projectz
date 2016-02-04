@@ -49,7 +49,7 @@ Manager.prototype.performUpdate = function (data, updateMethod) {
     var self      = this;
     var successCB = function (text) {
         console.log(text);
-        if (self.indexOf("true") !== -1) {
+        if (text.indexOf("true") !== -1) {
             self.notif.success("Item has been Updated", "Successfully Updated");
             // updates row with new data
             updateMethod(data, text);
