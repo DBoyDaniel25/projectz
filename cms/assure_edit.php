@@ -294,7 +294,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">I reassure</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="I am not leaving you...">
+                            <input type="text" id="reassure" class="form-control" placeholder="I am not leaving you...">
                         </div>
                     </div>
                     <input type="submit" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Update"/>
@@ -322,14 +322,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="gradeX">
-                    <td>Trident</td>
-                    <td>True</td>
-                    <td class="actions">
-                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
+                    <?php
+    /**
+     * Created by PhpStorm.
+     * User: evolutionarycoder
+     * Date: 2/4/16
+     * Time: 5:02 PM
+     */
+
+    use Backend\Database\Tables\Reassurance;
+    use Backend\Helpers\TableBuilder;
+
+    include "vendor/autoload.php";
+
+    $table   = new Reassurance();
+    $data    = $table->readAll();
+    $builder = new TableBuilder();
+    if ($data !== false) {
+        for ($i = 0; $i < count($data); $i++) {
+            $decoded = clone $data[$i];
+            $table->htmlDecode($decoded);
+            $current = $data[$i];
+            $builder->buildCell($current->getReassure() . " " . $current->getSynced())->
+            buildCell($current->getSynced()
+            );
+            $builder->addActionAttrs("reassure", $decoded->getReassure())->addActionAttrs("id", $decoded->getId());
+            $builder->addRowAttr("id", $current->getId());
+            echo $builder->buildRow();
+        }
+    }
+
+?>
                 </tbody>
             </table>
         </div>
@@ -498,7 +521,9 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-
+    <script src="js/scripts/classes/models/Reassure.js"></script>
+    <script src="js/scripts/reassure/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
 
 
 

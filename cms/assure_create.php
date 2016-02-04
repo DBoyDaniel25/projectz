@@ -292,7 +292,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">I reassure</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="I am not leaving you...">
+                            <input type="text" id="reassure" class="form-control" placeholder="I am not leaving you...">
                         </div>
                     </div>
                     <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
@@ -464,7 +464,8 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-
+    <script src="js/scripts/classes/models/Reassure.js"></script>
+    <script src="js/scripts/reassure/manage.js"></script>
 
 
 
