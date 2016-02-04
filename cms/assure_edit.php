@@ -343,9 +343,7 @@
             $decoded = clone $data[$i];
             $table->htmlDecode($decoded);
             $current = $data[$i];
-            $builder->buildCell($current->getReassure() . " " . $current->getSynced())->
-            buildCell($current->getSynced()
-            );
+            $builder->buildCell($current->getReassure())->buildCell($current->getSynced());
             $builder->addActionAttrs("reassure", $decoded->getReassure())->addActionAttrs("id", $decoded->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
