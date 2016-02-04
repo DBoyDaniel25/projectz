@@ -17,10 +17,10 @@ Poem.prototype = Object.create(Structure.prototype);
  * @param response Response from server
  */
 Poem.prototype.updateTable = function (data, response) {
-    var table = new Table("#tbody");
+    var table = new Table("#datatable-editable tbody");
     table.changeCell(data.id, 0, data.name);
     table.changeCell(data.id, 1, data.poem);
-    table.changeCell(data.id, 2, data.author);
+    table.changeCell(data.id, 3, data.author);
     table.updateActionAttributes(data.id,  {
         "data-name" : data.name,
         "data-poem": data.poem,
