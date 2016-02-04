@@ -22,6 +22,9 @@ var editBtn      = document.querySelectorAll(".edit-row"),
         if (manage.processFile.indexOf("ilove") !== -1) {
             ilove.getEditButtonData(this).populateForm(true);
         }
+        if (manage.processFile.indexOf("reassure") !== -1) {
+            reassure.getEditButtonData(this).populateForm(true);
+        }
 
         // show edit form
         $(".row.form").fadeIn();
