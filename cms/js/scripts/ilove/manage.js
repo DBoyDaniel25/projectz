@@ -17,7 +17,7 @@ if (submitBtn) {
             notif.error("Please fill in all fields");
             return;
         }
-        manage.performCreate(notif, data);
+        manage.performCreate(data);
     }, false);
 } else {
     var updateBtn = document.querySelector("#update");
@@ -29,6 +29,6 @@ if (submitBtn) {
             notif.error("Please fill in all fields");
             return;
         }
-        manage.performUpdate(notif, data, ilove.updateTable);
+        manage.performUpdate(data, ilove.updateTable);
     }, false)
 }

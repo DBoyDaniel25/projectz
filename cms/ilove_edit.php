@@ -283,7 +283,12 @@
 <div class="row form">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Update</h3></div>
+            <div class="panel-heading"><h3 class="panel-title">Update
+                    
+                        <a class="pull-right" id="close" href="#"><i class="ion-close-round"></i></a>
+                    
+                </h3>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
