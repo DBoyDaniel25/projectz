@@ -64,8 +64,8 @@
                 globalPosition: position,
                 showAnimation : "show",
                 showDuration  : 0,
+                autoHideDelay : 7000,
                 hideDuration  : 0,
-                autoHideDelay : 10000,
                 autoHide      : true,
                 clickToHide   : true
             });
@@ -86,7 +86,7 @@
             }
             $.notify({
                 title: title,
-                text : text + '<div class="clearfix"></div><br><a class="btn btn-sm btn-default yes">Yes</a><a class="btn btn-sm btn-danger no">No</a>',
+                text : text + '<div class="clearfix"></div><br><a id="yesConfirmBtn" class="btn btn-sm btn-default yes">Yes</a><a id="noConfirmBtn"  class="btn btn-sm btn-danger no">No</a>',
                 image: "<i class='" + icon + "'></i>"
             }, {
                 style         : 'metro',
@@ -98,17 +98,31 @@
                 autoHide      : false,
                 clickToHide   : false
             });
-            //listen for click events from this style
-            $(document).on('click', '.notifyjs-metro-base .no', function () {
+
+            function removeEvents() {
+                $(document).off('click', '.notifyjs-metro-base .no', noClick);
+                $(document).off('click', '.notifyjs-metro-base .yes', yesClick);
+            }
+
+            function noClick() {
                 //programmatically trigger propogating hide event
                 $(this).trigger('notify-hide');
-            });
-            $(document).on('click', '.notifyjs-metro-base .yes', function () {
+                removeEvents();
+            }
+
+
+            function yesClick () {
                 //callback when user clicks
                 callback();
+
                 //hide notification
                 $(this).trigger('notify-hide');
-            });
+                removeEvents();
+            }
+
+
+            $(document).on('click', '.notifyjs-metro-base .no', noClick);
+            $(document).on('click', '.notifyjs-metro-base .yes', yesClick);
         },
         //init - examples
         Notification.prototype.init = function () {

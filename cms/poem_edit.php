@@ -281,10 +281,17 @@
                 
     
     
-<div class="row">
+<div class="row form">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Update</h3></div>
+
+            <div class="panel-heading">
+                <h3 class="panel-title">Update
+                    
+                        <a class="pull-right" id="close" href="#"><i class="ion-close-round"></i></a>
+                    
+                </h3>
+            </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
@@ -334,17 +341,44 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="gradeX">
-                    <td>Trident</td>
-                    <td>Internet Explorer 4.0</td>
-                    <td>Win 95+</td>
-                    <td>Five</td>
-                    <td>True</td>
-                    <td class="actions">
-                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
+                <?php
+    /**
+     * Created by PhpStorm.
+     * User: evolutionarycoder
+     * Date: 2/3/16
+     * Time: 7:06 PM
+     */
+
+    use Backend\Database\Tables\Poems;
+    use Backend\Helpers\TableBuilder;
+
+    include "vendor/autoload.php";
+
+    $table   = new Poems();
+    $data    = $table->readAll();
+    $builder = new TableBuilder();
+    if ($data !== false) {
+        for ($i = 0; $i < count($data); $i++) {
+            $decoded = clone $data[$i];
+            $table->htmlDecode($decoded);
+
+            $current = $data[$i];
+            $builder->buildCell($current->getName())->
+                      buildCell($current->getPoem())->
+                      buildCell($current->getDate())->
+                      buildCell($current->getAuthor())->
+                      buildCell($current->getSynced()
+            );
+            $builder->addActionAttrs("name", $decoded->getName())->
+                      addActionAttrs("id", $decoded->getId())->
+                      addActionAttrs("poem", $decoded->getPoem())->
+                      addActionAttrs("author", $decoded->getAuthor());
+            $builder->addRowAttr("id", $current->getId());
+            echo $builder->buildRow();
+        }
+    }
+
+?>
                 </tbody>
             </table>
         </div>
@@ -486,12 +520,12 @@
 </script>
 
 <!-- jQuery  -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/waves.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/waves.js"></script>
+<script src="js/vendor/wow.min.js"></script>
+<script src="js/vendor/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="js/vendor/jquery.scrollTo.min.js"></script>
 <script src="assets/jquery-detectmobile/detect.js"></script>
 <script src="assets/fastclick/fastclick.js"></script>
 <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -503,7 +537,7 @@
 <script src="assets/notifications/notifications.js"></script>
 
 <!-- CUSTOM JS -->
-<script src="js/jquery.app.js"></script>
+<script src="js/vendor/jquery.app.js"></script>
 
 <!-- Daniel's Scripts -->
 <script src="js/scripts/Notification.js"></script>
@@ -511,8 +545,11 @@
 <script src="js/scripts/classes/Structure.js"></script>
 <script src="js/scripts/Ajaxify.js"></script>
 <script src="js/scripts/Validate.js"></script>
+<script src="js/scripts/Table.js"></script>
 
-
+    <script src="js/scripts/classes/models/Poem.js"></script>
+    <script src="js/scripts/poem/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
 
 
 

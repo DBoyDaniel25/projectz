@@ -114,12 +114,12 @@
 <script>
     var resizefunc = [];
 </script>
-<script src="cms/js/jquery.min.js"></script>
-<script src="cms/js/bootstrap.min.js"></script>
-<script src="cms/js/waves.js"></script>
-<script src="cms/js/wow.min.js"></script>
-<script src="cms/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="cms/js/jquery.scrollTo.min.js"></script>
+<script src="cms/js/vendor/jquery.min.js"></script>
+<script src="cms/js/vendor/bootstrap.min.js"></script>
+<script src="cms/js/vendor/waves.js"></script>
+<script src="cms/js/vendor/wow.min.js"></script>
+<script src="cms/js/vendor/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cms/js/vendor/jquery.scrollTo.min.js"></script>
 <script src="cms/assets/jquery-detectmobile/detect.js"></script>
 <script src="cms/assets/fastclick/fastclick.js"></script>
 <script src="cms/assets/jquery-slimscroll/jquery.slimscroll.js"></script>

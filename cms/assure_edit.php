@@ -280,7 +280,7 @@
 
                 
     
-<div class="row">
+<div class="row form">
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">Update</h3></div>
@@ -466,12 +466,12 @@
 </script>
 
 <!-- jQuery  -->
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/waves.js"></script>
-<script src="js/wow.min.js"></script>
-<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/vendor/jquery.min.js"></script>
+<script src="js/vendor/bootstrap.min.js"></script>
+<script src="js/vendor/waves.js"></script>
+<script src="js/vendor/wow.min.js"></script>
+<script src="js/vendor/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="js/vendor/jquery.scrollTo.min.js"></script>
 <script src="assets/jquery-detectmobile/detect.js"></script>
 <script src="assets/fastclick/fastclick.js"></script>
 <script src="assets/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -483,7 +483,7 @@
 <script src="assets/notifications/notifications.js"></script>
 
 <!-- CUSTOM JS -->
-<script src="js/jquery.app.js"></script>
+<script src="js/vendor/jquery.app.js"></script>
 
 <!-- Daniel's Scripts -->
 <script src="js/scripts/Notification.js"></script>
@@ -491,6 +491,7 @@
 <script src="js/scripts/classes/Structure.js"></script>
 <script src="js/scripts/Ajaxify.js"></script>
 <script src="js/scripts/Validate.js"></script>
+<script src="js/scripts/Table.js"></script>
 
 
 

@@ -65,15 +65,15 @@ Manager.prototype.performUpdate = function (data, updateMethod) {
 
 
 Manager.prototype.performDelete = function (data) {
-    if (confirm("Are you sure you want to delete this?")) {
-        data.delete = "delete";
-        this.notif.info("Deleting");
-        var self      = this;
+    data.delete = "delete";
+    var self = this;
+    this.notif.confirmDelete("Are you sure?", "Delete this Item?", function () {
+        self.notif.info("Deleting");
         var successCB = function (text) {
             if (text.indexOf("true") !== -1) {
                 self.notif.success("Item has been deleted", "Successfully Deleted");
                 var form  = new Validate(),
-                    table = new Table("#tbody");
+                    table = new Table();
                 form.resetForm();
                 table.removeRow(data.id);
             } else {
@@ -82,8 +82,8 @@ Manager.prototype.performDelete = function (data) {
         }, failCB     = function () {
             this.Success("false");
         };
-        this.ajaxRequest(successCB, failCB, data);
-    }
+        self.ajaxRequest(successCB, failCB, data);
+    });
 };
 
 

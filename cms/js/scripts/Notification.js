@@ -38,6 +38,6 @@ Notify.prototype.success = function (body, title) {
 
 Notify.prototype.confirmDelete = function (body, title, cb) {
     var titleText = title || "Hold On!";
-    $.Notification.confirm('error','center', titleText, body, cb);
+    $.Notification.confirm('error','right top', titleText, body, cb);
     return this;
 };

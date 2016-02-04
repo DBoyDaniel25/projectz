@@ -35,7 +35,7 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
     <![endif]-->
 
-    <script src="cms/js/modernizr.min.js"></script>
+    <script src="cms/js/vendor/modernizr.min.js"></script>
 
 </head>
 <body>
@@ -76,12 +76,12 @@
 <script>
     var resizefunc = [];
 </script>
-<script src="cms/js/jquery.min.js"></script>
-<script src="cms/js/bootstrap.min.js"></script>
-<script src="cms/js/waves.js"></script>
-<script src="cms/js/wow.min.js"></script>
-<script src="cms/js/jquery.nicescroll.js" type="text/javascript"></script>
-<script src="cms/js/jquery.scrollTo.min.js"></script>
+<script src="cms/js/vendor/jquery.min.js"></script>
+<script src="cms/js/vendor/bootstrap.min.js"></script>
+<script src="cms/js/vendor/waves.js"></script>
+<script src="cms/js/vendor/wow.min.js"></script>
+<script src="cms/js/vendor/jquery.nicescroll.js" type="text/javascript"></script>
+<script src="cms/js/vendor/jquery.scrollTo.min.js"></script>
 <script src="cms/assets/jquery-detectmobile/detect.js"></script>
 <script src="cms/assets/fastclick/fastclick.js"></script>
 <script src="cms/assets/jquery-slimscroll/jquery.slimscroll.js"></script>
@@ -89,7 +89,7 @@
 
 
 <!-- CUSTOM JS -->
-<script src="cms/js/jquery.app.js"></script>
+<script src="cms/js/vendor/jquery.app.js"></script>
 
 </body>
 </html>

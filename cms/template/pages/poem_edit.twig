@@ -2,6 +2,8 @@
 
 {% set type = "Update" %}
 {% set id = "update" %}
+{% set showClose = true %}
+
 {% block page_title %}
     Edit Poems
 {% endblock %}
@@ -32,20 +34,16 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="gradeX">
-                    <td>Trident</td>
-                    <td>Internet Explorer 4.0</td>
-                    <td>Win 95+</td>
-                    <td>Five</td>
-                    <td>True</td>
-                    <td class="actions">
-                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
+                {% include 'load_poems.php' %}
                 </tbody>
             </table>
         </div>
         <!-- end: page -->
     </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/scripts/classes/models/Poem.js"></script>
+    <script src="js/scripts/poem/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
 {% endblock %}
