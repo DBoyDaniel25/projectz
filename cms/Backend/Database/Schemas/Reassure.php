@@ -28,9 +28,13 @@
             $this->reassure = $reassure;
             if(is_null($synced)){
                 $this->synced   = "false";
+            }else {
+                $this->synced = $synced;
             }
             if(is_null($toUpdate)){
                 $this->toUpdate = "false";
+            }else {
+                $this->toUpdate = $toUpdate;
             }
         }
 
