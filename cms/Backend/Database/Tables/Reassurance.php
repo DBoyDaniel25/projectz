@@ -41,7 +41,6 @@
 
             $this->callback = function ($tableObj) {
                 $reassure = new Reassure($tableObj->id, $tableObj->reassure, $tableObj->synced, $tableObj->to_update);
-
                 return $reassure;
             };
         }
@@ -143,13 +142,12 @@
          * @return bool True on success, false on failure
          */
         public function update($obj) {
-            if (is_numeric($obj->getId()) && is_object($obj)) {
+            if ( is_object($obj) && is_numeric($obj->getId())) {
                 $this->id = (int)$obj->getId();
 
                 $oldData = $this->read($this->id, $this->callback);
 
                 if ($oldData !== false) {
-
                     $this->reassure = (is_null($obj->getReassure())) ? $oldData->getReassure() : $this->clean($obj->getReassure());
                     $this->synced   = (is_null($obj->getSynced())) ? $oldData->getSynced() : $obj->getSynced();
                     $this->toUpdate = (is_null($obj->getToUpdate())) ? $oldData->getToUpdate() : $obj->getToUpdate();

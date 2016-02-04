@@ -161,7 +161,7 @@
          * @return bool True on success, false on failure
          */
         public function update($obj) {
-            if (is_numeric($obj->getId()) && is_object($obj)) {
+            if (is_object($obj) && is_numeric($obj->getId())) {
                 $this->id = (int)$obj->getId();
 
                 $oldData = $this->read($this->id, $this->callback);
