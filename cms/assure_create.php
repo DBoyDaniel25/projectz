@@ -295,7 +295,7 @@
                             <input type="text" class="form-control" placeholder="I am not leaving you...">
                         </div>
                     </div>
-                    <button type="button" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Create</button>
+                    <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->

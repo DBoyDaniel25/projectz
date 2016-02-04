@@ -288,14 +288,14 @@
                 </h3>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" role="form">
+                <form class="form-horizontal" method="post" action="#" role="form">
                     <div class="form-group">
                         <label class="col-md-2 control-label">ILove</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="I love your...">
+                            <input type="text" id="ilove" class="form-control" placeholder="I love your...">
                         </div>
                     </div>
-                    <button type="button" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Create</button>
+                    <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->
@@ -464,7 +464,8 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-
+    <script src="js/scripts/classes/models/ILove.js"></script>
+    <script src="js/scripts/ilove/manage.js"></script>
 
 
 

@@ -312,7 +312,7 @@
                             <input type="text" id="author" class="form-control" placeholder="Daniel Prince" value="Daniel Prince">
                         </div>
                     </div>
-                    <button type="button" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right">Update</button>
+                    <input type="submit" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Update"/>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->
