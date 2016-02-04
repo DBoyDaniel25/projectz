@@ -29,7 +29,7 @@
             parent::__construct();
             // create prepared statements
             $this->c = $this->connection->prepare("INSERT INTO reassurance (reassure, synced, to_update) VALUES (?, ?, ?);");
-            $this->r = $this->connection->prepare("SELECT * FROM reassurance alias WHERE id = ?;");
+            $this->r = $this->connection->prepare("SELECT * FROM reassurance WHERE id = ?;");
             $this->u = $this->connection->prepare("UPDATE reassurance SET reassure = ?, synced = ?, to_update = ? WHERE id = ?;");
             $this->d = $this->connection->prepare("DELETE FROM reassurance  WHERE id = ?;");
 

@@ -29,14 +29,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr class="gradeX">
-                    <td>Trident</td>
-                    <td>True</td>
-                    <td class="actions">
-                        <a href="#" class="on-default edit-row"><i class="fa fa-pencil"></i></a>
-                        <a href="#" class="on-default remove-row"><i class="fa fa-trash-o"></i></a>
-                    </td>
-                </tr>
+                    {% include 'load_promises.php' %}
                 </tbody>
             </table>
         </div>
@@ -44,3 +37,8 @@
     </div>
 {% endblock %}
 
+{% block scripts %}
+    <script src="js/scripts/classes/models/Promise.js"></script>
+    <script src="js/scripts/promise/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
+{% endblock %}

@@ -26,6 +26,10 @@ var editBtn      = document.querySelectorAll(".edit-row"),
             reassure.getEditButtonData(this).populateForm(true);
         }
 
+        if (manage.processFile.indexOf("promise") !== -1) {
+            promise.getEditButtonData(this).populateForm(true);
+        }
+
         // show edit form
         $(".row.form").fadeIn();
     },
