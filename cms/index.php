@@ -565,7 +565,7 @@
 
     
     <!-- Todo -->
-    <script src="js/jquery.todo.js"></script>
+    <script src="js/vendor/jquery.todo.js"></script>
 
 
 
