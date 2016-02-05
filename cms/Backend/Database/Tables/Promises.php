@@ -70,6 +70,16 @@
             parent::createJson($name, $data);
         }
 
+        public function totalRows(){
+            $query = "select count(*) AS total from promises;";
+            $result = mysqli_query($this->connection, $query);
+            $data = "";
+            while($row = mysqli_fetch_assoc($result)){
+                $data = $row["total"];
+            }
+            return $data;
+        }
+
         /**
          * @param bool $decode
          *

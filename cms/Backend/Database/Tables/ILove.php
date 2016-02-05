@@ -66,6 +66,16 @@
             return false;
         }
 
+        public function totalRows(){
+            $query = "select count(*) AS total from loveabout;";
+            $result = mysqli_query($this->connection, $query);
+            $data = "";
+            while($row = mysqli_fetch_assoc($result)){
+                $data = $row["total"];
+            }
+            return $data;
+        }
+
         public function createJson($name, $data) {
             parent::createJson($name, $data);
         }
