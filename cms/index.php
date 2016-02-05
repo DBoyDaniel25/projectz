@@ -279,12 +279,38 @@
                 </div>
 
                 
+
+
+    <?php
+        use Backend\Database\Tables\ILove;
+        use Backend\Database\Tables\Memory;
+        use Backend\Database\Tables\Poems;
+        use Backend\Database\Tables\Promises;
+        use Backend\Database\Tables\Reassurance;
+
+        $poems      = new Poems();
+        $totalPoems = (int)$poems->totalRows();
+
+        $iloves      = new ILove();
+        $totalIloves = (int)$iloves->totalRows();
+
+        $assure      = new Reassurance();
+        $totalAssure = (int)$assure->totalRows();
+
+        $promise      = new Promises();
+        $totalPromise = (int)$promise->totalRows();
+
+        $memory      = new Memory();
+        $totalMemory = (int)$memory->totalRows();
+
+        $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;
+    ?>
     <!--Widget-4 -->
     <div class="row">
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="mini-stat clearfix bx-shadow">
                 <div class="mini-stat-info text-center text-muted">
-                    <span class="counter">15852</span>
+                    <span class="counter"><?php echo $totalPoems ?></span>
                     Total Poems
                 </div>
             </div>
@@ -292,7 +318,7 @@
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="mini-stat clearfix bx-shadow">
                 <div class="mini-stat-info text-center text-muted">
-                    <span class="counter">956</span>
+                    <span class="counter"><?php echo $totalPoems ?></span>
                     Total Quotes
                 </div>
             </div>
@@ -300,7 +326,7 @@
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="mini-stat clearfix bx-shadow">
                 <div class="mini-stat-info text-center text-muted">
-                    <span class="counter">5210</span>
+                    <span class="counter"><?php echo $totalIloves ?></span>
                     Total ILoves
                 </div>
             </div>
@@ -308,7 +334,39 @@
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="mini-stat clearfix bx-shadow">
                 <div class="mini-stat-info text-center text-muted">
-                    <span class="counter">20544</span>
+                    <span class="counter"><?php echo $totalAssure ?></span>
+                    Total Reassurance
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="mini-stat clearfix bx-shadow">
+                <div class="mini-stat-info text-center text-muted">
+                    <span class="counter"><?php echo $totalPromise ?></span>
+                    Total Promises
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="mini-stat clearfix bx-shadow">
+                <div class="mini-stat-info text-center text-muted">
+                    <span class="counter"><?php echo $totalMemory ?></span>
+                    Total Memory
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="mini-stat clearfix bx-shadow">
+                <div class="mini-stat-info text-center text-muted">
+                    <span class="counter">0</span>
+                    Total Requests
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-sm-6 col-lg-3">
+            <div class="mini-stat clearfix bx-shadow">
+                <div class="mini-stat-info text-center text-muted">
+                    <span class="counter"><?php echo $total ?></span>
                     Total Posts
                 </div>
             </div>
