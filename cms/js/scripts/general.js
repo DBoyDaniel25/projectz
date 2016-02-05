@@ -23,11 +23,15 @@ var editBtn      = document.querySelectorAll(".edit-row"),
             ilove.getEditButtonData(this).populateForm(true);
         }
         if (manage.processFile.indexOf("reassure") !== -1) {
-            reassure.getEditButtonData(this).populateForm(true);
+            memory.getEditButtonData(this).populateForm(true);
         }
 
         if (manage.processFile.indexOf("promise") !== -1) {
             promise.getEditButtonData(this).populateForm(true);
+        }
+
+        if (manage.processFile.indexOf("memory") !== -1) {
+            memory.getEditButtonData(this).populateForm(true);
         }
 
         // show edit form

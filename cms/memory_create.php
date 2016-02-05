@@ -292,7 +292,7 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">Memory</label>
                         <div class="col-md-10">
-                            <input type="text" class="form-control" placeholder="Remember when...">
+                            <input type="text" id="memory" class="form-control" placeholder="Remember when...">
                         </div>
                     </div>
                     <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
@@ -464,7 +464,8 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-
+    <script src="js/scripts/classes/models/Memory.js"></script>
+    <script src="js/scripts/memory/manage.js"></script>
 
 
 
