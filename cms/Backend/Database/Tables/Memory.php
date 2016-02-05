@@ -122,9 +122,9 @@
                     if ($result->num_rows > 0) {
                         $obj = $result->fetch_object();
                         $this->strip($obj);
-                        $ilove = $callback($obj);
+                        $memory = $callback($obj);
 
-                        return $ilove;
+                        return $memory;
                     }
                 }
             }

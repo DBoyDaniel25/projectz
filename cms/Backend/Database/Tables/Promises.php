@@ -115,9 +115,9 @@
                     if ($result->num_rows > 0) {
                         $obj = $result->fetch_object();
                         $this->strip($obj);
-                        $poem = $callback($obj);
+                        $promise = $callback($obj);
 
-                        return $poem;
+                        return $promise;
                     }
                 }
             }
