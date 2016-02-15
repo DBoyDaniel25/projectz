@@ -154,7 +154,7 @@
         }
 
         public function totalRowsInTable($table) {
-            $query  = "SELECT count(*) AS total FROM memory;";
+            $query  = "SELECT count(*) AS total FROM {$table};";
             $result = mysqli_query($this->connection, $query);
             $data   = "";
             while ($row = mysqli_fetch_assoc($result)) {
