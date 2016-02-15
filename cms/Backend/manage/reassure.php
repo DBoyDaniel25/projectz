@@ -25,6 +25,8 @@
         $id       = $_POST[\Backend\Database\Tables\Reassurance::ROW_ID];
 
         $obj = new \Backend\Database\Schemas\Reassure($id, $reassure);
+        $obj->setSynced(null);
+        $obj->setToUpdate("true");
 
         $table = new \Backend\Database\Tables\Reassurance();
         if ($table->update($obj)) {

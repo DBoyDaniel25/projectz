@@ -7,7 +7,7 @@ $(".row.form").fadeOut();
 // set up the edit, delete buttons
 var editBtn      = document.querySelectorAll(".edit-row"),
     deleteBtn    = document.querySelectorAll(".remove-row"),
-    closeBtn        = document.querySelector("#close"),
+    closeBtn     = document.querySelector("#close"),
     closeMethod  = function () {
         // show edit form
         $(".row.form").fadeOut();
@@ -23,7 +23,7 @@ var editBtn      = document.querySelectorAll(".edit-row"),
             ilove.getEditButtonData(this).populateForm(true);
         }
         if (manage.processFile.indexOf("reassure") !== -1) {
-            memory.getEditButtonData(this).populateForm(true);
+            reassure.getEditButtonData(this).populateForm(true);
         }
 
         if (manage.processFile.indexOf("promise") !== -1) {

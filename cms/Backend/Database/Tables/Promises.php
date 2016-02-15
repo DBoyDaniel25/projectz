@@ -19,46 +19,46 @@
         const ROW_ID     = "id";
         const PROMISE    = "promise";
 
-        private $id;
         private $promise;
         private $synced;
         private $toUpdate;
-        private $callback;
 
         public function __construct($database = false) {
             parent::__construct($database);
+            $table = self::TABLE_NAME;
             // create prepared statements
-            $this->c = $this->connection->prepare("INSERT INTO promises (promise, synced, to_update) VALUES (?, ?, ?);");
-            $this->r = $this->connection->prepare("SELECT * FROM promises WHERE id = ?;");
-            $this->u = $this->connection->prepare("UPDATE promises SET promise = ?, synced = ?, to_update = ? WHERE id = ?;");
-            $this->d = $this->connection->prepare("DELETE FROM promises  WHERE id = ?;");
+            $this->createPreparedStatement($table, [
+                "promise",
+                "synced",
+                "to_update"
+            ]);
+            $this->readPreparedStatement($table);
+            $this->updatePreparedStatement($table, [
+                "promise",
+                "synced",
+                "to_update"
+            ]);
+            $this->deletePreparedStatement($table);
 
             // bind params
             $this->c->bind_param("sss", $this->promise, $this->synced, $this->toUpdate);
             $this->r->bind_param("i", $this->id);
             $this->u->bind_param("sssi", $this->promise, $this->synced, $this->toUpdate, $this->id);
             $this->d->bind_param("i", $this->id);
-
-            $this->callback = function ($tableObj) {
-                $promise = new Promise($tableObj->id, $tableObj->promise, $tableObj->synced, $tableObj->to_update);
-
-                return $promise;
-            };
         }
 
 
         /**
-         * Creates a new row in database table
-         *
          * @param Promise $obj
          *
-         * @return bool True on success, false otherwise
+         * @return bool
          */
         public function create($obj) {
             if (is_object($obj)) {
-                $this->promise  = $this->clean($obj->getPromise());
-                $this->synced   = $this->clean($obj->getSynced());
-                $this->toUpdate = $this->clean($obj->getToUpdate());
+                $this->clean($obj);
+                $this->promise  = $obj->getPromise();
+                $this->synced   = $obj->getSynced();
+                $this->toUpdate = $obj->getToUpdate();
                 if ($this->c->execute()) {
                     return true;
                 }
@@ -67,103 +67,21 @@
             return false;
         }
 
-        public function createJson($name, $data) {
-            parent::createJson($name, $data);
-        }
-
-        public function totalRows() {
-            $query  = "SELECT count(*) AS total FROM promises;";
-            $result = mysqli_query($this->connection, $query);
-            $data   = "";
-            while ($row = mysqli_fetch_assoc($result)) {
-                $data = $row["total"];
-            }
-
-            return $data;
-        }
 
         /**
-         * @param bool $decode
-         *
-         * @return \Backend\Database\Schemas\Promise[]|bool
-         */
-        public function readAll($decode = false) {
-            return parent::readAllRows($decode, self::TABLE_NAME, $this->callback);
-        }
-
-
-        /**
-         * @return bool|Promise[]
-         */
-        public function readUnsynced() {
-            return parent::readUnsyncedRows(self::TABLE_NAME, $this->callback);
-        }
-
-
-        /**
-         * Fetch one row
-         *
-         * @param          $id
-         *
-         * @param callable $callback
-         *
-         * @return Promise|bool
-         */
-        public function read($id, $callback) {
-            if (is_numeric($id)) {
-                $this->id = (int)$id;
-                if ($this->r->execute()) {
-                    $result = $this->r->get_result();
-                    if ($result->num_rows > 0) {
-                        $obj = $result->fetch_object();
-                        $this->strip($obj);
-                        $promise = $callback($obj);
-
-                        return $promise;
-                    }
-                }
-            }
-
-            return false;
-        }
-
-
-        /**
-         * Deletes a row in database table
-         *
-         * @param $id
-         *
-         * @return bool True on success, false on failure
-         */
-        public function delete($id) {
-            if (is_numeric($id)) {
-                $this->id = (int)$id;
-                if ($this->d->execute()) {
-                    return $this->d->affected_rows > 0;
-                }
-            }
-
-            return false;
-        }
-
-
-        /**
-         * Updates a row in database table
-         *
          * @param Promise $obj
          *
-         * @return bool True on success, false on failure
+         * @return bool
          */
         public function update($obj) {
             if (is_object($obj) && is_numeric($obj->getId())) {
                 $this->id = (int)$obj->getId();
+                $oldData  = $this->read($this->id);
+                if (!is_bool($oldData) && $oldData instanceof Promise) {
+                    $this->promise  = $this->isNull($obj->getPromise(), $oldData->getPromise());
+                    $this->synced   = $this->isNull($obj->getSynced(), $oldData->getSynced());
+                    $this->toUpdate = $this->isNull($obj->getToUpdate(), $oldData->getToUpdate());
 
-                $oldData = $this->read($this->id, $this->callback);
-
-                if ($oldData !== false) {
-                    $this->promise  = (is_null($obj->getPromise())) ? $oldData->getPromise() : $this->clean($obj->getPromise());
-                    $this->synced   = (is_null($obj->getSynced())) ? $oldData->getSynced() : $obj->getSynced();
-                    $this->toUpdate = (is_null($obj->getToUpdate())) ? $oldData->getToUpdate() : $obj->getToUpdate();
                     if ($this->u->execute()) {
                         return true;
                     }
@@ -173,5 +91,27 @@
             return false;
         }
 
+        protected function createObjFromRow($row) {
+            $promise = new Promise($row->id, $row->promise, $row->synced, $row->to_update);
 
+            return $promise;
+        }
+
+        /**
+         * @return Promise[]|bool
+         */
+        public function readAll() {
+            return parent::readAllRows(self::TABLE_NAME);
+        }
+
+        /**
+         * @return Promise[]|bool
+         */
+        public function readAllUnsynced() {
+            return parent::readAllUnsyncedRows(self::TABLE_NAME);
+        }
+
+        public function totalRows() {
+            return parent::totalRowsInTable(self::TABLE_NAME);
+        }
     }

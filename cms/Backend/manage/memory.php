@@ -26,7 +26,8 @@
         $id       = $_POST[\Backend\Database\Tables\Memory::ROW_ID];
 
         $obj = new \Backend\Database\Schemas\Memory($id, $memory);
-
+        $obj->setSynced(null);
+        $obj->setToUpdate("true");
         $table = new \Backend\Database\Tables\Memory();
         if ($table->update($obj)) {
             echo "true";

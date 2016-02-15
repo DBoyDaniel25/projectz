@@ -342,7 +342,7 @@
     if ($data !== false) {
         for ($i = 0; $i < count($data); $i++) {
             $decoded = clone $data[$i];
-            $table->htmlDecode($decoded);
+            $table->stripAndDecode($decoded);
             $current = $data[$i];
             $builder->buildCell($current->getPromise())->buildCell($current->getSynced());
             $builder->addActionAttrs("promise", $decoded->getPromise())->addActionAttrs("id", $decoded->getId());

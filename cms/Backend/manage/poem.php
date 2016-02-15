@@ -34,6 +34,7 @@
         $author = $_POST[Poems::AUTHOR];
         $id     = $_POST[Poems::ROW_ID];
         $obj    = new Poem($id, $author, $name, $poem, null, null, "true", "true");
+        $obj->setSynced(null);
         $table  = new Poems();
         if($table->update($obj)){
             echo "true";

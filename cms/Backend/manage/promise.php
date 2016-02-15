@@ -25,6 +25,7 @@
         $id       = $_POST[\Backend\Database\Tables\Promises::ROW_ID];
 
         $obj = new \Backend\Database\Schemas\Promise($id, $promise);
+        $obj->setSynced(null);
 
         $table = new \Backend\Database\Tables\Promises();
         if ($table->update($obj)) {

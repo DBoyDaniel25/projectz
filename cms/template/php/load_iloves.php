@@ -17,7 +17,7 @@
     if ($data !== false) {
         for ($i = 0; $i < count($data); $i++) {
             $decoded = clone $data[$i];
-            $table->htmlDecode($decoded);
+            $table->stripAndDecode($decoded);
             $current = $data[$i];
             $builder->buildCell($current->getLove())->
                       buildCell($current->getSynced()
