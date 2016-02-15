@@ -11,17 +11,15 @@
     use Backend\Database\Tables\ILove;
     use Backend\Helpers\Email;
 
-    include "../../../../vendor/autoload.php";
+    include "../../../vendor/autoload.php";
     if (isset($_GET["fetch"])) {
         $table = new ILove();
-        $data  = $table->readUnsynced();
-        // creates json then redirects to the JSON file
-        $table->createJson(ILove::JSON_NAME, $data);
-        if($data !== false){
+
+        if ($table->createJson()) {
             $email = new Email("MyLove Synced", "Table " . ILove::TABLE_NAME);
             $email->send();
             header("Location: ../json/" . ILove::JSON_NAME);
-        }else{
+        } else {
             echo "false";
         }
     }

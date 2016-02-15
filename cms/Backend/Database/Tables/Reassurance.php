@@ -44,12 +44,6 @@
             $this->r->bind_param("i", $this->id);
             $this->u->bind_param("sssi", $this->reassure, $this->synced, $this->toUpdate, $this->id);
             $this->d->bind_param("i", $this->id);
-
-            $this->callback = function ($tableObj) {
-                $reassure = new Reassure($tableObj->id, $tableObj->reassure, $tableObj->synced, $tableObj->to_update);
-
-                return $reassure;
-            };
         }
 
         /**
@@ -122,5 +116,9 @@
 
         public function totalRows() {
             return parent::totalRowsInTable(self::TABLE_NAME);
+        }
+
+        public function createJSON() {
+            return parent::createJsonFile(self::JSON_NAME, $this->readAllUnsynced());
         }
     }

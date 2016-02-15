@@ -10,13 +10,11 @@
     use Backend\Database\Tables\Poems;
     use Backend\Helpers\Email;
 
-    include "../../../../vendor/autoload.php";
+    include "../../../vendor/autoload.php";
     if (isset($_GET["fetch"])) {
         $table = new Poems();
-        // creates json then redirects to the JSON file
-        $data = $table->readUnsynced();
-        $table->createJson(Poems::JSON_NAME, $data);
-        if($data !== false){
+
+        if($table->createJson()){
             $email = new Email("MyLove Synced", "Table " . Poems::TABLE_NAME);
             $email->send();
             header("Location: ../json/" . Poems::JSON_NAME);

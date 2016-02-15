@@ -124,11 +124,13 @@
 
         public abstract function readAllUnsynced();
 
+        public abstract function createJSON();
+
         public abstract function update($obj);
 
         public abstract function totalRows();
 
-        public function readAllUnsyncedRows($table) {
+        protected function readAllUnsyncedRows($table) {
             if ($this->isValidTable($table)) {
                 $query  = "select * from {$table} where synced = 'false';";
                 $result = mysqli_query($this->connection, $query);
@@ -153,7 +155,7 @@
             mysqli_query($this->connection, $query);
         }
 
-        public function totalRowsInTable($table) {
+        protected function totalRowsInTable($table) {
             $query  = "SELECT count(*) AS total FROM {$table};";
             $result = mysqli_query($this->connection, $query);
             $data   = "";
@@ -162,6 +164,19 @@
             }
 
             return $data;
+        }
+
+        protected function createJsonFile($filename, $data) {
+            if ($data !== false && is_array($data)) {
+                $handle = fopen($this->jsonLocation . $filename, 'w');
+                $json   = json_encode($data);
+                fwrite($handle, $json);
+                fclose($handle);
+
+                return true;
+            }
+
+            return false;
         }
 
         /**

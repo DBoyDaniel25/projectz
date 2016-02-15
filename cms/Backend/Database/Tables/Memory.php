@@ -114,4 +114,9 @@
         public function totalRows() {
             return parent::totalRowsInTable(self::TABLE_NAME);
         }
+
+
+        public function createJSON() {
+            return parent::createJsonFile(self::JSON_NAME, $this->readAllUnsynced());
+        }
     }
