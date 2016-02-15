@@ -24,8 +24,8 @@
         private $toUpdate;
         private $callback;
 
-        public function __construct() {
-            parent::__construct();
+        public function __construct($database = false) {
+            parent::__construct($database);
 
             // create prepared statements
             $this->c = $this->connection->prepare("insert into memory (memory, synced, to_update) values (?, ?, ?);");
@@ -96,7 +96,7 @@
          * @return  \Backend\Database\Schemas\Memory[]|bool
          */
         public function readUnsynced() {
-            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+            return parent::readUnsyncedRows(self::TABLE_NAME, $this->callback);
         }
 
         /**
@@ -104,7 +104,7 @@
          * @return  \Backend\Database\Schemas\Memory[]|bool
          */
         public function readAll($decode = false) {
-            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
+            return parent::readAllRows($decode, self::TABLE_NAME, $this->callback);
         }
 
 

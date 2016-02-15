@@ -25,8 +25,8 @@
 
         private $callback;
 
-        public function __construct() {
-            parent::__construct();
+        public function __construct($database = false) {
+            parent::__construct($database);
             // create prepared statements
             $this->c = $this->connection->prepare("INSERT INTO quotes (quote, synced, to_update) VALUES (?, ?, ?);");
             $this->r = $this->connection->prepare("SELECT * FROM quotes WHERE id = ?;");
@@ -97,7 +97,7 @@
          * @return \Backend\Database\Schemas\Quote[]|bool
          */
         public function readUnsynced() {
-            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+            return parent::readUnsyncedRows(self::TABLE_NAME, $this->callback);
         }
 
         /**
@@ -106,7 +106,7 @@
          * @return \Backend\Database\Schemas\Quote[]|bool
          */
         public function readAll($decode = false) {
-            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
+            return parent::readAllRows($decode, self::TABLE_NAME, $this->callback);
         }
 
 

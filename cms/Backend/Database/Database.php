@@ -9,17 +9,27 @@
     namespace Backend\Database;
 
 
-    class Database {
+    use Exception;
+
+    abstract class Database {
         const ENV = "local";
         protected $jsonLocation;
-        protected $connection, $c, $r, $u, $d;
+        protected $connection = false;
+        protected $c, $r, $u, $d;
         private   $host, $user, $pass, $db;
+
+        private static $isConnected = false;
 
         /**
          * Database constructor.
+         *
+         * @param bool $mysqli
+         *
+         * @throws Exception
+         * @param bool|\mysqli $mysqli
          */
-        public function __construct() {
-            if (self::ENV !== "local") {
+        public function __construct($mysqli = false) {
+            if (self::ENV !== "locals") {
                 // for production
                 $this->host         = "mysql.hostinger.in";
                 $this->user         = "u288716392_dp";
@@ -35,43 +45,55 @@
                 $this->jsonLocation = $_SERVER["DOCUMENT_ROOT"] . "/web/projectz/cms/Backend/api/json/";
             }
 
-            $this->connection = mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+            if ($mysqli !== false) {
+                $this->connection = $mysqli;
+            } else {
+                if (self::$isConnected === true) {
+                    throw new Exception("Database connection has already been created, use that connection by passing in the getConnection() method as a parameter");
+                } else {
+                    self::$isConnected = true;
+                    $this->connection =
+                        mysqli_connect($this->host, $this->user, $this->pass, $this->db);
+                }
+            }
 
             if (!$this->connection) {
                 die("Could not connect to database: " . mysqli_error($this->connection));
             }
-
         }
 
-
-        public function create($obj) {
-
+        /**
+         * @return \mysqli
+         */
+        public function getConnection() {
+            return $this->connection;
         }
 
-        public function read($id) {
+        public abstract function create($obj);
 
-        }
+        public abstract function read($id, $callback);
 
-        public function update($obj) {
+        public abstract function update($obj);
 
-        }
+        public abstract function delete($id);
 
-        public function delete($id) {
+        public abstract function readAll($decode);
 
-        }
+        public abstract function readUnsynced();
 
         /**
          * Retrieve all unsynced rows
          *
          *
          *
-         * @param string   $tableName The table to query
-         * @param callable $callback  A function which returns a database schema object of the table
-         *                            passed in, in the first parameter, where a mysql object of                                          that table will be passed into it
+         * @param string   $tableName                   The table to query
+         * @param callable $callback                    A function which returns a database schema object of the table
+         *                                              passed in, in the first parameter, where a mysql object of
+         *                                              that table will be passed into it
          *
          * @return object[]|bool Array of poem objects, false on failure
          */
-        public function readUnsynced($tableName, $callback) {
+        public function readUnsyncedRows($tableName, $callback) {
             $query  = "SELECT * FROM {$tableName} WHERE synced = 'false' ORDER BY id DESC;";
             $result = mysqli_query($this->connection, $query);
 
@@ -84,8 +106,10 @@
                     $data[] = $obj;
                 }
                 $this->updateUnSyncedToSynced($tableName);
+
                 return $data;
             }
+
             return false;
         }
 
@@ -116,7 +140,7 @@
          *
          * @param string $tableName The table name to update
          */
-        private function updateUnSyncedToSynced($tableName) {
+        private function updateUnSyncedRowsStatusToSynced($tableName) {
             $query = "UPDATE {$tableName} SET synced = 'true' WHERE synced = 'false';";
             mysqli_query($this->connection, $query);
         }
@@ -129,7 +153,7 @@
          *
          * @return object[]|bool
          */
-        public function readAll($decode = false, $tableName, $callback) {
+        public function readAllRows($decode = false, $tableName, $callback) {
             $query  = "SELECT * FROM {$tableName} ORDER BY id DESC;";
             $result = mysqli_query($this->connection, $query);
 

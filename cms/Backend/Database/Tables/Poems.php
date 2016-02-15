@@ -35,12 +35,8 @@
         private $synced;
         private $toUpdate;
 
-        /**
-         * Poems constructor.
-         */
-        public function __construct() {
-            parent::__construct();
-
+        public function __construct($mysqli = false) {
+            parent::__construct($mysqli);
             // prepared statements
             $this->c = $this->connection->prepare("INSERT INTO poems (author, date, poemname, poem, favourite, synced, to_update) VALUES (?, ?, ?, ?, ?, ?, ?);");
             $this->r = $this->connection->prepare("SELECT * FROM poems WHERE id = ?;");
@@ -87,13 +83,14 @@
             return false;
         }
 
-        public function totalRows(){
-            $query = "select count(*) AS total from poems;";
+        public function totalRows() {
+            $query  = "SELECT count(*) AS total FROM poems;";
             $result = mysqli_query($this->connection, $query);
-            $data = "";
-            while($row = mysqli_fetch_assoc($result)){
+            $data   = "";
+            while ($row = mysqli_fetch_assoc($result)) {
                 $data = $row["total"];
             }
+
             return $data;
         }
 
@@ -103,10 +100,11 @@
 
         /**
          * @param bool $decode
+         *
          * @return \Backend\Database\Schemas\Poem[]|bool
          */
         public function readAll($decode = false) {
-            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
+            return parent::readAllRows($decode, self::TABLE_NAME, $this->callback);
         }
 
 
@@ -114,16 +112,17 @@
          * @return bool|Poem[]
          */
         public function readUnsynced() {
-            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+            return parent::readUnsyncedRows(self::TABLE_NAME, $this->callback);
         }
 
 
         /**
          * Fetch one row
          *
-         * @param $id
+         * @param          $id
          *
          * @param callable $callback
+         *
          * @return Poem|bool
          */
         public function read($id, $callback) {
@@ -135,6 +134,7 @@
                         $obj = $result->fetch_object();
                         $this->strip($obj);
                         $poem = $callback($obj);
+
                         return $poem;
                     }
                 }

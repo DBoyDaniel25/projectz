@@ -279,8 +279,7 @@
                 </div>
 
                 
-
-
+    <!-- Fetch Total Records from the relevant table  -->
     <?php
         use Backend\Database\Tables\ILove;
         use Backend\Database\Tables\Memory;
@@ -291,16 +290,16 @@
         $poems      = new Poems();
         $totalPoems = (int)$poems->totalRows();
 
-        $iloves      = new ILove();
+        $iloves      = new ILove($poems->getConnection());
         $totalIloves = (int)$iloves->totalRows();
 
-        $assure      = new Reassurance();
+        $assure      = new Reassurance($poems->getConnection());
         $totalAssure = (int)$assure->totalRows();
 
-        $promise      = new Promises();
+        $promise      = new Promises($poems->getConnection());
         $totalPromise = (int)$promise->totalRows();
 
-        $memory      = new Memory();
+        $memory      = new Memory($poems->getConnection());
         $totalMemory = (int)$memory->totalRows();
 
         $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;

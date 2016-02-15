@@ -17,17 +17,17 @@
         $poems      = new Poems();
         $totalPoems = (int)$poems->totalRows();
 
-        $iloves      = new ILove();
+        $iloves      = new ILove($poems->getConnection());
         $totalIloves = (int)$iloves->totalRows();
 
-        $assure      = new Reassurance();
+        $assure      = new Reassurance($poems->getConnection());
         $totalAssure = (int)$assure->totalRows();
 
-        $promise      = new Promises();
-        $totalPromise = (int)$assure->totalRows();
+        $promise      = new Promises($poems->getConnection());
+        $totalPromise = (int)$promise->totalRows();
 
-        $memory      = new Memory();
-        $totalMemory = (int)$assure->totalRows();
+        $memory      = new Memory($poems->getConnection());
+        $totalMemory = (int)$memory->totalRows();
 
         $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;
     ?>

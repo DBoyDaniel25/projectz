@@ -26,9 +26,8 @@
          */
         private $callback;
 
-        public function __construct() {
-            parent::__construct();
-            // create prepared statements
+        public function __construct($database = false) {
+            parent::__construct($database);            // create prepared statements
             $this->c = $this->connection->prepare("INSERT INTO loveabout (ilove, synced) VALUES (?, ?);");
             $this->r = $this->connection->prepare("SELECT * FROM loveabout WHERE id = ?;");
             $this->u = $this->connection->prepare("UPDATE loveabout SET ilove = ? WHERE id = ?;");
@@ -66,13 +65,14 @@
             return false;
         }
 
-        public function totalRows(){
-            $query = "select count(*) AS total from loveabout;";
+        public function totalRows() {
+            $query  = "SELECT count(*) AS total FROM loveabout;";
             $result = mysqli_query($this->connection, $query);
-            $data = "";
-            while($row = mysqli_fetch_assoc($result)){
+            $data   = "";
+            while ($row = mysqli_fetch_assoc($result)) {
                 $data = $row["total"];
             }
+
             return $data;
         }
 
@@ -96,22 +96,24 @@
          * @return \Backend\Database\Schemas\ILove[]|bool
          */
         public function readUnsynced() {
-            return parent::readUnsynced(self::TABLE_NAME, $this->callback);
+            return parent::readUnsyncedRows(self::TABLE_NAME, $this->callback);
         }
 
         /**
          * @param bool $decode
+         *
          * @return \Backend\Database\Schemas\ILove[]|bool
          */
         public function readAll($decode = false) {
-            return parent::readAll($decode, self::TABLE_NAME, $this->callback);
+            return parent::readAllRows($decode, self::TABLE_NAME, $this->callback);
         }
 
 
         /**
-         * @param $id
+         * @param          $id
          *
          * @param callable $callback
+         *
          * @return \Backend\Database\Schemas\ILove|bool
          */
         public function read($id, $callback) {

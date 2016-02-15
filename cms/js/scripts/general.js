@@ -34,6 +34,10 @@ var editBtn      = document.querySelectorAll(".edit-row"),
             memory.getEditButtonData(this).populateForm(true);
         }
 
+        if (manage.processFile.indexOf("quote") !== -1) {
+            quote.getEditButtonData(this).populateForm(true);
+        }
+
         // show edit form
         $(".row.form").fadeIn();
     },
