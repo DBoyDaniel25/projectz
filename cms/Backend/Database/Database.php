@@ -212,7 +212,7 @@
         }
 
         protected function readAllRows($table) {
-            $query  = "select * from {$table};";
+            $query  = "select * from {$table} ORDER BY id DESC;";
             $result = mysqli_query($this->connection, $query);
 
             if (mysqli_num_rows($result) > 0) {
