@@ -15,16 +15,34 @@
         const ENV = "local";
         protected $id;
 
+        /**
+         * @var bool Flag to see if a connection has already been made
+         */
+        private static $isConnected = false;
+
+        /**
+         * @var string location to json folder
+         */
         protected $jsonLocation;
+
+        /**
+         * @var bool|\mysqli
+         */
         protected $connection = false;
+
         /**
          * @var \mysqli_stmt
          */
         protected $c, $r, $u, $d;
-        private               $host, $user, $pass, $db;
 
-        private static $isConnected = false;
+        /**
+         * @var string MySQL Credentials
+         */
+        private $host, $user, $pass, $db;
 
+        /**
+         * @var array Tables in database
+         */
         private $tables = [
             "answers",
             "loveabout",
@@ -150,10 +168,6 @@
             return false;
         }
 
-        private function updateUnsyncedRows($table) {
-            $query = "update {$table} set synced = 'true' where synced = 'false';";
-            mysqli_query($this->connection, $query);
-        }
 
         protected function totalRowsInTable($table) {
             $query  = "SELECT count(*) AS total FROM {$table};";
@@ -214,16 +228,6 @@
             return false;
         }
 
-        /**
-         * Checks to see if a valid table prepared statement is being created
-         *
-         * @param $tableName
-         *
-         * @return bool If the table is a valid table name
-         */
-        private function isValidTable($tableName) {
-            return in_array($tableName, $this->tables);
-        }
 
         /**
          * Creates the 'create' prepared statement
@@ -243,45 +247,6 @@
         }
 
 
-        /**
-         * @param $table
-         * @param $columns
-         *
-         * @return string
-         */
-        private function createStatementQuery($table, $columns) {
-            if ($this->isValidTable($table)) {
-                $query = "INSERT INTO {$table} (";
-                // hold the placeholder question marks
-                $questionMarks = " VALUES (";
-                // loop through columns
-                for ($i = 0; $i < count($columns); $i++) {
-                    if ($i > 0) {
-                        // insert into {table} (column1, column2, column 3
-                        $query .= ", " . $columns[$i];
-                        // values (?, ?, ?
-                        $questionMarks .= ", ?";
-                    } else {
-                        $query .= $columns[$i];
-                        $questionMarks .= "?";
-                    }
-                }
-                $query = rtrim($query);
-
-                // insert into {table} (column1, column2, column 3)
-                $query .= ")";
-
-                // values (?, ?, ?)
-                $questionMarks .= ")";
-
-                // insert into {table} (column1, column2, column 3) values (?, ?, ?)
-                $query .= $questionMarks;
-
-                return $query;
-            } else {
-                throw new \InvalidArgumentException("Not a valid table name");
-            }
-        }
 
         /**
          * Creates a read prepared statement
@@ -319,29 +284,6 @@
             }
         }
 
-        private function updateStatementQuery($table, $columns, $where = null) {
-            if ($this->isValidTable($table)) {
-                $query = "update {$table} set ";
-
-                for ($i = 0; $i < count($columns); $i++) {
-                    if ($i > 0) {
-                        $query .= ", " . $columns[$i] . " = ?";
-                    } else {
-                        $query .= $columns[$i] . " = ?";
-                    }
-                }
-
-                if (!is_null($where)) {
-                    $query .= " where " . $where;
-                } else {
-                    $query .= " where id = ?";
-                }
-
-                return $query;
-            } else {
-                throw new \InvalidArgumentException("Not a valid table name");
-            }
-        }
 
         /**
          * Checks to see if the value parameter is null if it is it returns the
@@ -417,6 +359,87 @@
         protected function strip($obj) {
             foreach ($obj as $key => $val) {
                 $obj->$key = stripcslashes($val);
+            }
+        }
+
+
+        private function updateUnsyncedRows($table) {
+            $query = "update {$table} set synced = 'true' where synced = 'false';";
+            mysqli_query($this->connection, $query);
+        }
+
+        /**
+         * Checks to see if a valid table prepared statement is being created
+         *
+         * @param $tableName
+         *
+         * @return bool If the table is a valid table name
+         */
+        private function isValidTable($tableName) {
+            return in_array($tableName, $this->tables);
+        }
+
+        /**
+         * @param $table
+         * @param $columns
+         *
+         * @return string
+         */
+        private function createStatementQuery($table, $columns) {
+            if ($this->isValidTable($table)) {
+                $query = "INSERT INTO {$table} (";
+                // hold the placeholder question marks
+                $questionMarks = " VALUES (";
+                // loop through columns
+                for ($i = 0; $i < count($columns); $i++) {
+                    if ($i > 0) {
+                        // insert into {table} (column1, column2, column 3
+                        $query .= ", " . $columns[$i];
+                        // values (?, ?, ?
+                        $questionMarks .= ", ?";
+                    } else {
+                        $query .= $columns[$i];
+                        $questionMarks .= "?";
+                    }
+                }
+                $query = rtrim($query);
+
+                // insert into {table} (column1, column2, column 3)
+                $query .= ")";
+
+                // values (?, ?, ?)
+                $questionMarks .= ")";
+
+                // insert into {table} (column1, column2, column 3) values (?, ?, ?)
+                $query .= $questionMarks;
+
+                return $query;
+            } else {
+                throw new \InvalidArgumentException("Not a valid table name");
+            }
+        }
+
+        private function updateStatementQuery($table, $columns, $where = null) {
+            if ($this->isValidTable($table)) {
+                $query = "update {$table} set ";
+
+                for ($i = 0; $i < count($columns); $i++) {
+                    if ($i > 0) {
+                        $query .= ", " . $columns[$i] . " = ?";
+                    } else {
+                        $query .= $columns[$i] . " = ?";
+                    }
+                }
+
+                if (!is_null($where)) {
+                    $query .= " where " . $where;
+                } else {
+                    $query .= " where id = ?";
+                }
+
+                return $query;
+            } else {
+                throw new \InvalidArgumentException("Not a valid table name");
             }
         }
 
