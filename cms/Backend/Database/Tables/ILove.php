@@ -10,6 +10,7 @@
 
 
     use Backend\Database\Database;
+    use Backend\Database\Schemas\Notification;
 
     class ILove extends Database {
         const JSON_NAME  = "ilove.json";
@@ -52,6 +53,9 @@
                 $this->love   = $obj->getLove();
                 $this->synced = $obj->getSynced();
                 if ($this->c->execute()) {
+                    $notification = new Notifications($this->getConnection());
+                    $obj  = new Notification(null, "New ILove");
+                    $notification->create($obj);
                     return true;
                 }
             }

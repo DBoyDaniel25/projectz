@@ -9,6 +9,7 @@
 
 
     use Backend\Database\Database;
+    use Backend\Database\Schemas\Notification;
     use Backend\Database\Schemas\Poem;
 
     class Poems extends Database {
@@ -76,6 +77,9 @@
                 $this->synced    = $obj->getSynced();
                 $this->toUpdate  = $obj->getToUpdate();
                 if ($this->c->execute()) {
+                    $notification = new Notifications($this->getConnection());
+                    $obj  = new Notification(null, "New Poem");
+                    $notification->create($obj);
                     return true;
                 }
             }

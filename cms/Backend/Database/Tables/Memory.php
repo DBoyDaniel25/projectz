@@ -10,6 +10,7 @@
 
 
     use Backend\Database\Database;
+    use Backend\Database\Schemas\Notification;
 
     class Memory extends Database {
 
@@ -61,6 +62,10 @@
                 $this->toUpdate = $obj->getToUpdate();
 
                 if ($this->c->execute()) {
+                    $notification = new Notifications($this->getConnection());
+                    $obj          = new Notification(null, "New Memory");
+                    $notification->create($obj);
+
                     return true;
                 }
             }

@@ -15,6 +15,7 @@
         const ENV = "local";
         protected $id;
 
+
         /**
          * @var bool Flag to see if a connection has already been made
          */
@@ -46,6 +47,7 @@
         private $tables = [
             "answers",
             "loveabout",
+            "notifications",
             "memory",
             "music_links",
             "photogallery",
@@ -100,7 +102,6 @@
                         mysqli_connect($this->host, $this->user, $this->pass, $this->db);
                 }
             }
-
             if (!$this->connection) {
                 die("Could not connect to database: " . mysqli_error($this->connection));
             }
@@ -148,9 +149,12 @@
 
         public abstract function totalRows();
 
-        protected function readAllUnsyncedRows($table) {
+        protected function readAllUnsyncedRows($table, $customQuery = false) {
             if ($this->isValidTable($table)) {
                 $query  = "select * from {$table} where synced = 'false';";
+                if(!is_bool($customQuery)){
+                    $query = $customQuery;
+                }
                 $result = mysqli_query($this->connection, $query);
                 if (mysqli_num_rows($result) > 0) {
                     $data = [];
