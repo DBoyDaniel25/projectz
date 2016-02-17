@@ -85,6 +85,7 @@
                 $this->id = (int)$obj->getId();
                 $oldData  = $this->read($this->id);
                 if ($oldData !== false && $oldData instanceof Reassure) {
+                    $this->clean($obj);
                     $this->reassure = $this->isNull($obj->getReassure(), $oldData->getReassure());
                     $this->synced   = $this->isNull($obj->getSynced(), $oldData->getSynced());
                     $this->toUpdate = $this->isNull($obj->getToUpdate(), $oldData->getToUpdate());

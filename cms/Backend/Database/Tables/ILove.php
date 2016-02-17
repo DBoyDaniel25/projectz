@@ -72,6 +72,7 @@
             if (is_object($obj) && is_numeric($obj->getId())) {
                 $oldData = $this->read($obj->getId());
                 if (!is_bool($oldData) && $oldData instanceof \Backend\Database\Schemas\ILove) {
+                    $this->clean($obj);
                     $this->id   = (int) $obj->getId();
                     $this->love = $this->isNull($obj->getLove(), $oldData->getLove());
 

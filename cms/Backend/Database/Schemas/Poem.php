@@ -53,6 +53,11 @@
             } else {
                 $this->toUpdate = $toUpdate;
             }
+            if (is_null($favourite)) {
+                $this->favourite = "false";
+            } else {
+                $this->favourite = $toUpdate;
+            }
         }
 
         /**
@@ -82,7 +87,11 @@
          * @param mixed $synced
          */
         public function setSynced($synced) {
-            $this->synced = $synced;
+            if (is_null($synced)) {
+                $this->synced = "false";
+            } else {
+                $this->synced = $synced;
+            }
         }
 
 

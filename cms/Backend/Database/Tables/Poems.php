@@ -99,6 +99,7 @@
                 $oldData  = $this->read($this->id);
 
                 if (!is_bool($oldData) && $oldData instanceof Poem) {
+                    $this->clean($obj);
                     $this->author    = $this->isNull($obj->getAuthor(), $oldData->getAuthor());
                     $this->name      = $this->isNull($obj->getName(), $oldData->getName());
                     $this->poem      = $this->isNull($obj->getPoem(), $oldData->getPoem());

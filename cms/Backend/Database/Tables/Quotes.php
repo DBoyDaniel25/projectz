@@ -82,6 +82,7 @@
                 $this->id = (int)$obj->getId();
                 $oldData  = $this->read($obj->id);
                 if ($oldData !== false && $oldData instanceof Quote) {
+                    $this->clean($obj);
                     $this->quote    = $this->isNull($obj->getQuote(), $oldData->getQuote());
                     $this->synced   = $this->isNull($obj->getSynced(), $oldData->getSynced());
                     $this->toUpdate = $this->isNull($obj->getToUpdate(), $oldData->getToUpdate());

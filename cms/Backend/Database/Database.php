@@ -330,7 +330,7 @@
          */
         protected function clean($obj) {
             foreach ($obj as $key => $val) {
-                $obj->$key = html_entity_decode(mysqli_real_escape_string($this->connection, $val));
+                $obj->$key = htmlentities(mysqli_real_escape_string($this->connection, $val), ENT_QUOTES);
             }
         }
 
@@ -349,9 +349,9 @@
          *
          * @param object $obj
          */
-        protected function decode($obj) {
+        public function decode($obj) {
             foreach ($obj as $key => $val) {
-                $obj->$key = html_entity_decode($val);
+                $obj->$key = html_entity_decode($val, ENT_QUOTES);
             }
         }
 
@@ -360,7 +360,7 @@
          *
          * @param object $obj
          */
-        protected function strip($obj) {
+        public function strip($obj) {
             foreach ($obj as $key => $val) {
                 $obj->$key = stripcslashes($val);
             }

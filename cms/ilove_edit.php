@@ -344,10 +344,10 @@
             $decoded = clone $data[$i];
             $table->stripAndDecode($decoded);
             $current = $data[$i];
-            $builder->buildCell($current->getLove())->
-                      buildCell($current->getSynced()
+            $builder->buildCell($decoded->getLove())->
+                      buildCell($decoded->getSynced()
             );
-            $builder->addActionAttrs("ilove", $decoded->getLove())->addActionAttrs("id", $decoded->getId());
+            $builder->addActionAttrs("ilove", $current->getLove())->addActionAttrs("id", $current->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
         }

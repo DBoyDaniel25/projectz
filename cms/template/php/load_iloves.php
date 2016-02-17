@@ -18,11 +18,13 @@
         for ($i = 0; $i < count($data); $i++) {
             $decoded = clone $data[$i];
             $table->stripAndDecode($decoded);
+            $table->strip($data[$i]);
+
             $current = $data[$i];
-            $builder->buildCell($current->getLove())->
-                      buildCell($current->getSynced()
+            $builder->buildCell($decoded->getLove())->
+                      buildCell($decoded->getSynced()
             );
-            $builder->addActionAttrs("ilove", $decoded->getLove())->addActionAttrs("id", $decoded->getId());
+            $builder->addActionAttrs("ilove", $current->getLove())->addActionAttrs("id", $current->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
         }

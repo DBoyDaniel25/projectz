@@ -84,6 +84,7 @@
                 $this->id = (int)$obj->getId();
                 $oldData  = $this->read($this->id);
                 if (!is_bool($oldData) && $oldData instanceof \Backend\Database\Schemas\Memory) {
+                    $this->clean($obj);
                     $this->memory   = $this->isNull($obj->getMemory(), $oldData->getMemory());
                     $this->synced   = $this->isNull($obj->getSynced(), $oldData->getSynced());
                     $this->toUpdate = $this->isNull($obj->getToUpdate(), $oldData->getToUpdate());

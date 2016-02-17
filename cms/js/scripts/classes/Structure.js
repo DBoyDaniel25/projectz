@@ -122,10 +122,6 @@ Structure.prototype.updateTable = function (data, response) {
 
 };
 
-Structure.prototype.hasId = function () {
-    return this[this.fieldNames[0]] !== "no-data";
-};
-
 
 /**
  * Chainable
@@ -134,7 +130,10 @@ Structure.prototype.hasId = function () {
  */
 Structure.prototype.getEditButtonData = function (element) {
     for (var i = 0; i < this.fieldNames.length; i++) {
-        this[this.fieldNames[i]] = element.getAttribute("data-" + this.fieldNames[i].toLowerCase());
+        var val = element.getAttribute("data-" + this.fieldNames[i].toLowerCase());
+        val = val.replace(/\\'/g, "'");
+        val = val.replace(/\\"/g, '"');
+        this[this.fieldNames[i]] = val;
     }
     return this;
 };

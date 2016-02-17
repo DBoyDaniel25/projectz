@@ -343,8 +343,8 @@
             $decoded = clone $data[$i];
             $table->stripAndDecode($decoded);
             $current = $data[$i];
-            $builder->buildCell($current->getReassure())->buildCell($current->getSynced());
-            $builder->addActionAttrs("reassure", $decoded->getReassure())->addActionAttrs("id", $decoded->getId());
+            $builder->buildCell($decoded->getReassure())->buildCell($decoded->getSynced());
+            $builder->addActionAttrs("reassure", $current->getReassure())->addActionAttrs("id", $current->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
         }

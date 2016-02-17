@@ -344,8 +344,8 @@
             $decoded = clone $data[$i];
             $table->stripAndDecode($decoded);
             $current = $data[$i];
-            $builder->buildCell($current->getPromise())->buildCell($current->getSynced());
-            $builder->addActionAttrs("promise", $decoded->getPromise())->addActionAttrs("id", $decoded->getId());
+            $builder->buildCell($decoded->getPromise())->buildCell($decoded->getSynced());
+            $builder->addActionAttrs("promise", $current->getPromise())->addActionAttrs("id", $current->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
         }
