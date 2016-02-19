@@ -23,7 +23,7 @@ var editBtn      = document.querySelectorAll(".edit-row"),
             ilove.getEditButtonData(this).populateForm(true);
         }
         if (manage.processFile.indexOf("reassure") !== -1) {
-            reassure.getEditButtonData(this).populateForm(true);
+            specialday.getEditButtonData(this).populateForm(true);
         }
 
         if (manage.processFile.indexOf("promise") !== -1) {
@@ -36,6 +36,10 @@ var editBtn      = document.querySelectorAll(".edit-row"),
 
         if (manage.processFile.indexOf("quote") !== -1) {
             quote.getEditButtonData(this).populateForm(true);
+        }
+
+        if (manage.processFile.indexOf("specialday") !== -1) {
+            specialday.getEditButtonData(this).populateForm(true);
         }
 
         // show edit form

@@ -1,0 +1,55 @@
+{% extends "base.twig" %}
+
+{% set type = "Update" %}
+{% set id = "update" %}
+{% set showClose = true %}
+{% block page_title %}
+    Edit a Quote
+{% endblock %}
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css"/>
+{% endblock %}
+
+{% block content %}
+    {% include 'specialday_form.twig' %}
+
+    {# Table #}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <h3>Special Days</h3>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped" id="datatable-editable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Message</th>
+                        <th>Synced</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% include 'load_specialdays.php' %}
+                </tbody>
+            </table>
+        </div>
+        <!-- end: page -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
+
+    <script>
+        $( "#date" ).datepicker({
+            dateFormat: "dd/mm"
+        });
+    </script>
+    <script src="js/scripts/classes/models/SpecialDay.js"></script>
+    <script src="js/scripts/specialday/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
+{% endblock %}

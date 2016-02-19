@@ -25,8 +25,8 @@
     <title>My Love</title>
 
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css"/>
 
-    
 
 
     <!-- Base Css Files -->
@@ -61,8 +61,8 @@
 
     <!-- Daniel's CSS -->
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css"/>
 
-    
 
 </head>
 
@@ -290,7 +290,7 @@
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">
                             
-    Create a Memory
+    Create a Quote
 
                         </h4>
                         <ol class="breadcrumb pull-right">
@@ -313,9 +313,15 @@
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Memory</label>
+                        <label class="col-md-2 control-label">Date: dd/mm (18/04)</label>
                         <div class="col-md-10">
-                            <input type="text" id="memory" class="form-control" placeholder="Remember when...">
+                            <input type="text" id="date" class="form-control" placeholder="Date">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Message</label>
+                        <div class="col-md-10">
+                            <input type="text" id="message" class="form-control" placeholder="Happy Birthday">
                         </div>
                     </div>
                     <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
@@ -487,8 +493,16 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-    <script src="js/scripts/classes/models/Memory.js"></script>
-    <script src="js/scripts/memory/manage.js"></script>
+    <script src="js/scripts/classes/models/SpecialDay.js"></script>
+    <script src="js/scripts/specialday/manage.js"></script>
+
+    <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
+
+    <script>
+        $( "#date" ).datepicker({
+            dateFormat: "dd/mm"
+        });
+    </script>
 
 
 

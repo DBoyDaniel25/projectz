@@ -1,0 +1,31 @@
+{% extends "base.twig" %}
+
+
+{% set type = "Create" %}
+{% set id = "create" %}
+
+{% block css %}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.css"/>
+{% endblock %}
+
+
+{% block page_title %}
+    Create a Quote
+{% endblock %}
+
+{% block content %}
+    {% include 'specialday_form.twig' %}
+{% endblock %}
+{% block scripts %}
+    <script src="js/scripts/classes/models/SpecialDay.js"></script>
+    <script src="js/scripts/specialday/manage.js"></script>
+
+    <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
+
+    <script>
+        $( "#date" ).datepicker({
+            dateFormat: "dd/mm"
+        });
+    </script>
+{% endblock %}
+
