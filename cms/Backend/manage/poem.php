@@ -54,8 +54,8 @@
     }
 
     // fetch total rows
-    if(isset($_POST["total"])){
+    if(isset($_GET["total"])){
         $table = new Poems();
         $total = $table->totalRows();
-        echo $total;
+        echo $total . " poem";
     }

@@ -343,6 +343,8 @@
         for ($i = 0; $i < count($data); $i++) {
             $decoded = clone $data[$i];
             $table->stripAndDecode($decoded);
+            $table->strip($data[$i]);
+
             $current = $data[$i];
             $builder->buildCell($decoded->getLove())->
                       buildCell($decoded->getSynced()

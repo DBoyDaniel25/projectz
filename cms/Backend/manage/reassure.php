@@ -52,8 +52,8 @@
     }
 
     // fetch total rows
-    if(isset($_POST["total"])){
+    if(isset($_GET["total"])){
         $table = new Reassurance();
         $total = $table->totalRows();
-        echo $total;
+        echo $total . " reassure";
     }

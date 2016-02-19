@@ -24,6 +24,10 @@ var Manager = function (processFile) {
 };
 
 
+Manager.prototype.performRequest = function (successCB, failureCB, data, method) {
+    this.ajaxRequest(successCB, failureCB, data, method);
+};
+
 Manager.prototype.performCreate = function (data) {
     data.create = "create";
     this.notif.info("Creating");
@@ -87,14 +91,15 @@ Manager.prototype.performDelete = function (data) {
 };
 
 
-Manager.prototype.ajaxRequest = function (successCallback, failureCallback, data) {
+Manager.prototype.ajaxRequest = function (successCallback, failureCallback, data, method) {
     var self          = this;
     var dataToProcess = data || {};
+    var methodType = method || "POST";
     Ajaxify({
         host        : self.hostName + "Backend/manage/" + self.processFile,
         data        : [dataToProcess],
         responseType: "text",
-        method      : "POST",
+        method      : methodType,
         execute     : true,
         Success     : successCallback,
         Failure     : failureCallback

@@ -17,19 +17,19 @@
         $poems      = new Poems();
         $totalPoems = (int)$poems->totalRows();
 
-        $iloves      = new ILove($poems->getConnection());
-        $totalIloves = (int)$iloves->totalRows();
+    $iloves      = new ILove($poems->getConnection());
+    $totalIloves = (int)$iloves->totalRows();
 
-        $assure      = new Reassurance($poems->getConnection());
-        $totalAssure = (int)$assure->totalRows();
+    $assure      = new Reassurance($poems->getConnection());
+    $totalAssure = (int)$assure->totalRows();
 
-        $promise      = new Promises($poems->getConnection());
-        $totalPromise = (int)$promise->totalRows();
+    $promise      = new Promises($poems->getConnection());
+    $totalPromise = (int)$promise->totalRows();
 
-        $memory      = new Memory($poems->getConnection());
-        $totalMemory = (int)$memory->totalRows();
+    $memory      = new Memory($poems->getConnection());
+    $totalMemory = (int)$memory->totalRows();
 
-        $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;
+    $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;
     ?>
     <!--Widget-4 -->
     <div class="row">
@@ -173,9 +173,16 @@
         });
     </script>
 
+    {# Todo List #}
+    <!-- Todo -->
+    <script src="js/vendor/jquery.todo.js"></script>
+
+
     {# Pie Chart #}
     {# custom scripts needed #}
-    <script src="js/scripts/classes/PieChart.js"></script>
+    <script src="js/scripts/Ajaxify.js"></script>
+    <script src="js/scripts/classes/Manager.js"></script>
+
     {# base scriprs#}
     <script src="assets/flot-chart/jquery.flot.js"></script>
     <script src="assets/flot-chart/jquery.flot.time.js"></script>
@@ -185,10 +192,59 @@
     <script src="assets/flot-chart/jquery.flot.selection.js"></script>
     <script src="assets/flot-chart/jquery.flot.stack.js"></script>
     <script src="assets/flot-chart/jquery.flot.crosshair.js"></script>
-    <script src="assets/flot-chart/jquery.flot.init.js"></script>
 
-    {# Todo List #}
-    <!-- Todo -->
-    <script src="js/vendor/jquery.todo.js"></script>
+    <script src="js/scripts/classes/PieChart.js"></script>
+    <script>
+        var pieC = new PieChart(null, null, [
+                    "#058DC7",
+                    "#FF6F34",
+                    "#50B432"
+                ]),
+                data = [];
+
+        var iloveManager = new Manager("ilove.php"),
+                memoryManager = new Manager("memory.php"),
+                poemManager = new Manager("poem.php"),
+                promiseManager = new Manager("promise.php"),
+                reassureManager = new Manager("reassure.php");
+
+        var success = function (text) {
+                    if (text.length <= 0) {
+                        text = 0;
+                    }
+                    data.push(text);
+                    createGraph();
+                },
+                fail = function () {
+                    data.push(0);
+                };
+        var requestParams = {
+            total: "totalRowsPlease"
+        };
+
+        iloveManager.performRequest(success, fail, requestParams, "GET");
+        memoryManager.performRequest(success, fail, requestParams, "GET");
+        poemManager.performRequest(success, fail, requestParams, "GET");
+        promiseManager.performRequest(success, fail, requestParams, "GET");
+        reassureManager.performRequest(success, fail, requestParams, "GET");
+
+        function createGraph() {
+            if (data.length === 5) {
+                var newDataSet  = [],
+                    newLabelSet = [];
+                for (var i = 0; i < data.length; i++) {
+                    var posOfSpace = data[i].indexOf(" ");
+                    var value      = data[i].substr(0, posOfSpace),
+                        label      = data[i].substr(posOfSpace).toUpperCase();
+                    newDataSet.push(parseInt(value));
+                    newLabelSet.push(label);
+                    console.log(label + " " + value);
+                }
+                pieC.setData(newDataSet);
+                pieC.setLabels(newLabelSet);
+                pieC.createGraph();
+            }
+        }
+    </script>
 {% endblock %}
 
