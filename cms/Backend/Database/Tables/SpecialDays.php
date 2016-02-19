@@ -88,7 +88,7 @@
         }
 
         public function createJSON() {
-            parent::createJsonFile(self::JSON_NAME, $this->readAllUnsynced());
+            return parent::createJsonFile(self::JSON_NAME, $this->readAllUnsynced());
         }
 
         /**

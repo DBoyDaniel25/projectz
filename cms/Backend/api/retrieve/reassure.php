@@ -5,6 +5,8 @@
      * Date: 2/16/16
      * Time: 2:43 PM
      */
+    header("Cache-Control: no-cache, no-store");
+    header("Pragma: no-cache");
     use Backend\Database\Tables\Reassurance;
     use Backend\Helpers\Email;
 
