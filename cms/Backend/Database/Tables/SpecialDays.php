@@ -36,7 +36,6 @@
             $this->updatePreparedStatement($table, [
                 "date",
                 "message",
-                "synced",
                 "to_update"
             ]);
             $this->deletePreparedStatement($table);
@@ -44,9 +43,8 @@
             // bind params
             $this->c->bind_param("ssss", $this->date, $this->message, $this->synced, $this->toUpdate);
             $this->r->bind_param("i", $this->id);
-            $this->u->bind_param("ssssi", $this->date, $this->message, $this->synced, $this->toUpdate, $this->id);
+            $this->u->bind_param("sssi", $this->date, $this->message, $this->toUpdate, $this->id);
             $this->d->bind_param("i", $this->id);
-
         }
 
 
@@ -103,7 +101,6 @@
                 $oldData  = $this->read($this->id);
                 if (!is_bool($oldData) && $oldData instanceof SpecialDay) {
                     $this->clean($obj);
-
                     $this->date     = $this->isNull($obj->getDate(), $oldData->getDate());
                     $this->message  = $this->isNull($obj->getMessage(), $oldData->getMessage());
                     $this->synced   = $this->isNull($obj->getSynced(), $oldData->getSynced());

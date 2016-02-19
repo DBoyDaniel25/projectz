@@ -31,9 +31,7 @@
         $message = $_POST[SpecialDays::MESSAGE];
         $id      = $_POST[SpecialDays::ROW_ID];
 
-        $obj = new SpecialDay($id, $date, $message);
-        $obj->setSynced(null);
-        $obj->setToUpdate("true");
+        $obj = new SpecialDay($id, $date, $message, null, "true");
 
         $table = new SpecialDays();
         if ($table->update($obj)) {

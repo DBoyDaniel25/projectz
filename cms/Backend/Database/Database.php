@@ -299,7 +299,11 @@
          * @return mixed
          */
         protected function isNull($value, $oldValue) {
-            return (is_null($value)) ? $oldValue : $value;
+            if($value === null){
+                return $oldValue;
+            }else {
+                return $value;
+            }
         }
 
         /**
