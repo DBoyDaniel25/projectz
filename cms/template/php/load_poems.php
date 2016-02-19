@@ -9,7 +9,6 @@
     use Backend\Database\Tables\Poems;
     use Backend\Helpers\TableBuilder;
 
-    include "vendor/autoload.php";
 
     $table   = new Poems();
     $data    = $table->readAll();

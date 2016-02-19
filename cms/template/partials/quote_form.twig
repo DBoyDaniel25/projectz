@@ -1,0 +1,24 @@
+{# form #}
+<div class="row form">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">{{ type }}
+                    {% if showClose %}
+                        <a class="pull-right" id="close" href="#"><i class="ion-close-round"></i></a>
+                    {% endif %}
+                </h3>
+            </div>
+            <div class="panel-body">
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">Quote</label>
+                        <div class="col-md-10">
+                            <input type="text" id="quote" class="form-control" placeholder="Enter Quote">
+                        </div>
+                    </div>
+                    <input type="submit" id="{{ id }}" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="{{ type }}"/>
+                </form>
+            </div> <!-- panel-body -->
+        </div> <!-- panel -->
+    </div> <!-- col -->
+</div>

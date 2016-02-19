@@ -245,6 +245,15 @@
                     </ul>
                 </li>
 
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-clock-o"></i><span> Quote </span><span
+                                class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="quote_create.php">Create</a></li>
+                        <li><a href="quote_edit.php">Edit</a></li>
+                    </ul>
+                </li>
+
             </ul>
             <div class="clearfix"></div>
         </div>
@@ -285,6 +294,7 @@
         use Backend\Database\Tables\Memory;
         use Backend\Database\Tables\Poems;
         use Backend\Database\Tables\Promises;
+        use Backend\Database\Tables\Quotes;
         use Backend\Database\Tables\Reassurance;
 
         $poems      = new Poems();
@@ -302,7 +312,10 @@
     $memory      = new Memory($poems->getConnection());
     $totalMemory = (int)$memory->totalRows();
 
-    $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory;
+    $quote      = new Quotes($poems->getConnection());
+    $totalQuotes = (int)$quote->totalRows();
+
+    $total = $totalPoems + $totalIloves + $totalAssure + $totalPromise + $totalMemory + $totalQuotes;
     ?>
     <!--Widget-4 -->
     <div class="row">
@@ -317,7 +330,7 @@
         <div class="col-md-6 col-sm-6 col-lg-3">
             <div class="mini-stat clearfix bx-shadow">
                 <div class="mini-stat-info text-center text-muted">
-                    <span class="counter"><?php echo $totalPoems ?></span>
+                    <span class="counter"><?php echo $totalQuotes ?></span>
                     Total Quotes
                 </div>
             </div>
@@ -596,7 +609,8 @@
                 memoryManager = new Manager("memory.php"),
                 poemManager = new Manager("poem.php"),
                 promiseManager = new Manager("promise.php"),
-                reassureManager = new Manager("reassure.php");
+                reassureManager = new Manager("reassure.php"),
+                quoteManager = new Manager("quote.php");
 
         var success = function (text) {
                     if (text.length <= 0) {
@@ -617,9 +631,10 @@
         poemManager.performRequest(success, fail, requestParams, "GET");
         promiseManager.performRequest(success, fail, requestParams, "GET");
         reassureManager.performRequest(success, fail, requestParams, "GET");
+        quoteManager.performRequest(success, fail, requestParams, "GET");
 
         function createGraph() {
-            if (data.length === 5) {
+            if (data.length === 6) {
                 var newDataSet  = [],
                     newLabelSet = [];
                 for (var i = 0; i < data.length; i++) {

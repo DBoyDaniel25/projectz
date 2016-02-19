@@ -276,7 +276,7 @@
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">
                             
-    Edit ILove
+    Edit a Quote
 
                         </h4>
                         <ol class="breadcrumb pull-right">
@@ -301,9 +301,9 @@
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Memory</label>
+                        <label class="col-md-2 control-label">Quote</label>
                         <div class="col-md-10">
-                            <input type="text" id="memory" class="form-control" placeholder="Remember when...">
+                            <input type="text" id="quote" class="form-control" placeholder="Enter Quote">
                         </div>
                     </div>
                     <input type="submit" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Update"/>
@@ -319,32 +319,31 @@
             <div class="row">
                 <div class="col-sm-6">
                     <div class="m-b-30">
-                        <h3>Memory</h3>
+                        <h3>Quote</h3>
                     </div>
                 </div>
             </div>
             <table class="table table-bordered table-striped" id="datatable-editable">
                 <thead>
-                <tr>
-                    <th>Memory</th>
-                    <th>Synced</th>
-                    <th>Actions</th>
-                </tr>
+                    <tr>
+                        <th>Quote</th>
+                        <th>Synced</th>
+                        <th>Actions</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <?php
     /**
      * Created by PhpStorm.
      * User: evolutionarycoder
-     * Date: 2/4/16
-     * Time: 7:53 PM
+     * Date: 2/19/16
+     * Time: 1:55 PM
      */
 
-    use Backend\Database\Tables\Memory;
+    use Backend\Database\Tables\Quotes;
     use Backend\Helpers\TableBuilder;
 
-
-    $table   = new Memory();
+    $table   = new Quotes();
     $data    = $table->readAll();
     $builder = new TableBuilder();
     if ($data !== false) {
@@ -354,8 +353,8 @@
             $table->strip($data[$i]);
 
             $current = $data[$i];
-            $builder->buildCell($decoded->getMemory())->buildCell($decoded->getSynced());
-            $builder->addActionAttrs("memory", $current->getMemory())->addActionAttrs("id", $current->getId());
+            $builder->buildCell($decoded->getQuote())->buildCell($decoded->getSynced());
+            $builder->addActionAttrs("quote", $current->getQuote())->addActionAttrs("id", $current->getId());
             $builder->addRowAttr("id", $current->getId());
             echo $builder->buildRow();
         }
@@ -530,8 +529,8 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-    <script src="js/scripts/classes/models/Memory.js"></script>
-    <script src="js/scripts/memory/manage.js"></script>
+    <script src="js/scripts/classes/models/Quote.js"></script>
+    <script src="js/scripts/quote/manage.js"></script>
     <script src="js/scripts/general.js"></script>
 
 

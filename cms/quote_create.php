@@ -276,7 +276,7 @@
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">
                             
-    Edit ILove
+    Create a Quote
 
                         </h4>
                         <ol class="breadcrumb pull-right">
@@ -292,81 +292,24 @@
 <div class="row form">
     <div class="col-sm-12">
         <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Update
-                    
-                        <a class="pull-right" id="close" href="#"><i class="ion-close-round"></i></a>
+            <div class="panel-heading"><h3 class="panel-title">Create
                     
                 </h3>
             </div>
             <div class="panel-body">
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
-                        <label class="col-md-2 control-label">Memory</label>
+                        <label class="col-md-2 control-label">Quote</label>
                         <div class="col-md-10">
-                            <input type="text" id="memory" class="form-control" placeholder="Remember when...">
+                            <input type="text" id="quote" class="form-control" placeholder="Enter Quote">
                         </div>
                     </div>
-                    <input type="submit" id="update" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Update"/>
+                    <input type="submit" id="create" class="btn btn-primary btn-rounded waves-effect waves-light m-b-5 pull-right" value="Create"/>
                 </form>
             </div> <!-- panel-body -->
         </div> <!-- panel -->
     </div> <!-- col -->
 </div>
-
-    
-    <div class="panel">
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="m-b-30">
-                        <h3>Memory</h3>
-                    </div>
-                </div>
-            </div>
-            <table class="table table-bordered table-striped" id="datatable-editable">
-                <thead>
-                <tr>
-                    <th>Memory</th>
-                    <th>Synced</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <?php
-    /**
-     * Created by PhpStorm.
-     * User: evolutionarycoder
-     * Date: 2/4/16
-     * Time: 7:53 PM
-     */
-
-    use Backend\Database\Tables\Memory;
-    use Backend\Helpers\TableBuilder;
-
-
-    $table   = new Memory();
-    $data    = $table->readAll();
-    $builder = new TableBuilder();
-    if ($data !== false) {
-        for ($i = 0; $i < count($data); $i++) {
-            $decoded = clone $data[$i];
-            $table->stripAndDecode($decoded);
-            $table->strip($data[$i]);
-
-            $current = $data[$i];
-            $builder->buildCell($decoded->getMemory())->buildCell($decoded->getSynced());
-            $builder->addActionAttrs("memory", $current->getMemory())->addActionAttrs("id", $current->getId());
-            $builder->addRowAttr("id", $current->getId());
-            echo $builder->buildRow();
-        }
-    }
-
-?>
-                </tbody>
-            </table>
-        </div>
-        <!-- end: page -->
-    </div>
 
 
 
@@ -530,9 +473,8 @@
 <script src="js/scripts/Validate.js"></script>
 <script src="js/scripts/Table.js"></script>
 
-    <script src="js/scripts/classes/models/Memory.js"></script>
-    <script src="js/scripts/memory/manage.js"></script>
-    <script src="js/scripts/general.js"></script>
+    <script src="js/scripts/classes/models/Quote.js"></script>
+    <script src="js/scripts/quote/manage.js"></script>
 
 
 

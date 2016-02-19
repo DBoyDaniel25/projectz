@@ -1,0 +1,18 @@
+{% extends "base.twig" %}
+
+
+{% set type = "Create" %}
+{% set id = "create" %}
+
+{% block page_title %}
+    Create a Quote
+{% endblock %}
+
+{% block content %}
+    {% include 'quote_form.twig' %}
+{% endblock %}
+{% block scripts %}
+    <script src="js/scripts/classes/models/Quote.js"></script>
+    <script src="js/scripts/quote/manage.js"></script>
+{% endblock %}
+

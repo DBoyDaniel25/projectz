@@ -1,0 +1,44 @@
+{% extends "base.twig" %}
+
+{% set type = "Update" %}
+{% set id = "update" %}
+{% set showClose = true %}
+{% block page_title %}
+    Edit a Quote
+{% endblock %}
+
+{% block content %}
+    {% include 'quote_form.twig' %}
+
+    {# Table #}
+    <div class="panel">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="m-b-30">
+                        <h3>Quote</h3>
+                    </div>
+                </div>
+            </div>
+            <table class="table table-bordered table-striped" id="datatable-editable">
+                <thead>
+                    <tr>
+                        <th>Quote</th>
+                        <th>Synced</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% include 'load_quotes.php' %}
+                </tbody>
+            </table>
+        </div>
+        <!-- end: page -->
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/scripts/classes/models/Quote.js"></script>
+    <script src="js/scripts/quote/manage.js"></script>
+    <script src="js/scripts/general.js"></script>
+{% endblock %}

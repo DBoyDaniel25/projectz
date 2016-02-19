@@ -9,7 +9,6 @@
     use Backend\Database\Tables\ILove;
     use Backend\Helpers\TableBuilder;
 
-    include "vendor/autoload.php";
 
     $table   = new ILove();
     $data    = $table->readAll();

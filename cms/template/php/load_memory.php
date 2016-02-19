@@ -9,7 +9,6 @@
     use Backend\Database\Tables\Memory;
     use Backend\Helpers\TableBuilder;
 
-    include "vendor/autoload.php";
 
     $table   = new Memory();
     $data    = $table->readAll();

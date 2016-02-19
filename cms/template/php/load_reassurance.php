@@ -9,7 +9,6 @@
     use Backend\Database\Tables\Reassurance;
     use Backend\Helpers\TableBuilder;
 
-    include "vendor/autoload.php";
 
     $table   = new Reassurance();
     $data    = $table->readAll();

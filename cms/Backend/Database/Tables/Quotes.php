@@ -102,6 +102,9 @@
             return $quote;
         }
 
+        /**
+         * @return Quote[]|bool
+         */
         public function readAll() {
             return parent::readAllRows(self::TABLE_NAME);
         }
