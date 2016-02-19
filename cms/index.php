@@ -376,43 +376,6 @@
     <!-- Pie Chart -->
     <div class="row">
 
-        <div class="col-lg-7">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Todo</h3>
-                </div>
-                <div class="panel-body todoapp">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <h4 id="todo-message"><span id="todo-remaining"></span> of <span
-                                        id="todo-total"></span> remaining</h4>
-                        </div>
-                        <div class="col-sm-6">
-                            <a href="" class="pull-right btn btn-primary btn-sm"
-                               id="btn-archive">Archive</a>
-                        </div>
-                    </div>
-
-                    <ul class="list-group no-margn nicescroll todo-list" style="max-height: 288px;"
-                        id="todo-list"></ul>
-
-                    <form name="todo-form" id="todo-form" role="form" class="m-t-20">
-                        <div class="row">
-                            <div class="col-sm-9 todo-inputbar">
-                                <input type="text" id="todo-input-text" name="todo-input-text"
-                                       class="form-control" placeholder="Add new todo">
-                            </div>
-                            <div class="col-sm-3 todo-send">
-                                <button class="btn-info btn-block btn" type="button" id="todo-btn-submit">
-                                    Add
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
         <div class="col-lg-5">
             <div class="panel panel-border panel-primary">
                 <div class="panel-heading">
@@ -618,13 +581,7 @@
 
     
     <script src="assets/flot-chart/jquery.flot.js"></script>
-    <script src="assets/flot-chart/jquery.flot.time.js"></script>
-    <script src="assets/flot-chart/jquery.flot.tooltip.min.js"></script>
-    <script src="assets/flot-chart/jquery.flot.resize.js"></script>
     <script src="assets/flot-chart/jquery.flot.pie.js"></script>
-    <script src="assets/flot-chart/jquery.flot.selection.js"></script>
-    <script src="assets/flot-chart/jquery.flot.stack.js"></script>
-    <script src="assets/flot-chart/jquery.flot.crosshair.js"></script>
 
     <script src="js/scripts/classes/PieChart.js"></script>
     <script>
@@ -671,7 +628,6 @@
                         label      = data[i].substr(posOfSpace).toUpperCase();
                     newDataSet.push(parseInt(value));
                     newLabelSet.push(label);
-                    console.log(label + " " + value);
                 }
                 pieC.setData(newDataSet);
                 pieC.setLabels(newLabelSet);

@@ -679,8 +679,8 @@
 
             // trigger any hover bind events
 
-            var pos = {pageX: e.pageX, pageY: e.pageY};
-            target.trigger(eventname, [pos, item]);
+            //var pos = {pageX: e.pageX, pageY: e.pageY};
+            //target.trigger(eventname, [pos, item]);
         }
 
         function highlight(s, auto) {
