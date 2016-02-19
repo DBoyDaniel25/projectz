@@ -56,7 +56,7 @@
             if (is_null($favourite)) {
                 $this->favourite = "false";
             } else {
-                $this->favourite = $toUpdate;
+                $this->favourite = $favourite;
             }
         }
 
