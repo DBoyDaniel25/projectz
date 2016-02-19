@@ -6,6 +6,8 @@
      * Time: 7:48 PM
      */
 
+    use Backend\Database\Tables\Memory;
+
     include "../../vendor/autoload.php";
     if (isset($_POST["create"])) {
         $memory = $_POST[\Backend\Database\Tables\Memory::MEMORY];
@@ -23,7 +25,7 @@
     if (isset($_POST["update"])) {
 
         $memory = $_POST[\Backend\Database\Tables\Memory::MEMORY];
-        $id       = $_POST[\Backend\Database\Tables\Memory::ROW_ID];
+        $id     = $_POST[\Backend\Database\Tables\Memory::ROW_ID];
 
         $obj = new \Backend\Database\Schemas\Memory($id, $memory);
         $obj->setSynced(null);
@@ -44,4 +46,11 @@
         } else {
             echo "false";
         }
+    }
+
+    // fetch total rows
+    if (isset($_POST["total"])) {
+        $table = new Memory();
+        $total = $table->totalRows();
+        echo $total;
     }

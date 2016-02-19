@@ -5,6 +5,8 @@
      * Date: 1/27/16
      * Time: 11:58 AM
      */
+    use Backend\Database\Tables\ILove;
+
     include "../../vendor/autoload.php";
     if (isset($_POST["create"])) {
         $name = $_POST[\Backend\Database\Tables\ILove::LOVE];
@@ -44,4 +46,11 @@
         } else {
             echo "false";
         }
+    }
+
+    // fetch total rows
+    if(isset($_POST["total"])){
+        $table = new ILove();
+        $total = $table->totalRows();
+        echo $total;
     }

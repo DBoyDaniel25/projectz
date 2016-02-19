@@ -52,3 +52,10 @@
             echo "false";
         }
     }
+
+    // fetch total rows
+    if(isset($_POST["total"])){
+        $table = new Poems();
+        $total = $table->totalRows();
+        echo $total;
+    }

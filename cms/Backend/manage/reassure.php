@@ -5,7 +5,10 @@
      * Date: 2/4/16
      * Time: 4:19 PM
      */
+    use Backend\Database\Tables\Reassurance;
+
     include "../../vendor/autoload.php";
+    // create new row in database
     if (isset($_POST["create"])) {
         $reassure = $_POST[\Backend\Database\Tables\Reassurance::REASSURE];
 
@@ -19,6 +22,7 @@
         }
     }
 
+    // update rows in database
     if (isset($_POST["update"])) {
 
         $reassure = $_POST[\Backend\Database\Tables\Reassurance::REASSURE];
@@ -36,6 +40,7 @@
         }
     }
 
+    // delete rows in database
     if (isset($_POST["delete"])) {
         $id    = $_POST[\Backend\Database\Tables\Reassurance::ROW_ID];
         $table = new \Backend\Database\Tables\Reassurance();
@@ -44,4 +49,11 @@
         } else {
             echo "false";
         }
+    }
+
+    // fetch total rows
+    if(isset($_POST["total"])){
+        $table = new Reassurance();
+        $total = $table->totalRows();
+        echo $total;
     }

@@ -5,6 +5,8 @@
      * Date: 2/4/16
      * Time: 6:55 PM
      */
+    use Backend\Database\Tables\Promises;
+
     include "../../vendor/autoload.php";
     if (isset($_POST["create"])) {
         $promise = $_POST[\Backend\Database\Tables\Promises::PROMISE];
@@ -43,4 +45,11 @@
         } else {
             echo "false";
         }
+    }
+
+    // fetch total rows
+    if(isset($_POST["total"])){
+        $table = new Promises();
+        $total = $table->totalRows();
+        echo $total;
     }
