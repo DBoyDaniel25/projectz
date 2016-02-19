@@ -24,6 +24,11 @@
 
     <title>My Love</title>
 
+    
+
+    
+
+
     <!-- Base Css Files -->
     <link href="css/bootstrap.min.css" rel="stylesheet"/>
 
@@ -251,6 +256,15 @@
                     <ul class="list-unstyled">
                         <li><a href="quote_create.php">Create</a></li>
                         <li><a href="quote_edit.php">Edit</a></li>
+                    </ul>
+                </li>
+
+                <li class="has_sub">
+                    <a href="#" class="waves-effect"><i class="fa fa-quote-right"></i><span> Date </span><span
+                                class="pull-right"><i class="md md-add"></i></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="specialday_create.php">Create</a></li>
+                        <li><a href="specialday_edit.php">Edit</a></li>
                     </ul>
                 </li>
 
