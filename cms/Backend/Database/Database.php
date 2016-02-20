@@ -187,7 +187,10 @@
         protected function createJsonFile($filename, $data) {
             if ($data !== false && is_array($data)) {
                 $handle = fopen($this->jsonLocation . $filename, 'w');
-                $json   = json_encode($data);
+                for($i =0; $i < count($data); $i++){
+                    $this->stripAndDecode($data[$i]);
+                }
+                $json   = json_encode($data, JSON_UNESCAPED_SLASHES);
                 fwrite($handle, $json);
                 fclose($handle);
 
