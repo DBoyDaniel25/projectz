@@ -18,7 +18,7 @@
             $table->strip($data[$i]);
 
             $current = $data[$i];
-            $builder->buildCell($decoded->getDate())->buildCell($decoded->getMessage())->buildCell($decoded->getSynced())->buildCell($decoded->getToUpdate());
+            $builder->buildCell($decoded->getDate())->buildCell($decoded->getMessage())->buildCell($decoded->getSynced());
             $builder->addActionAttrs("date", $current->getDate())->
             addActionAttrs("id", $current->getId())->addActionAttrs("message", $current->getMessage());
             $builder->addRowAttr("id", $current->getId());
