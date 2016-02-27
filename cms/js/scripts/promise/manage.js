@@ -4,15 +4,25 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("promise.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    promise;
+    validate  = Validate(),
+    promise,
+    options   = {
+        checkIsEmpty: true,
+        specific    : [
+            {
+                property: "promise",
+                length  : 500,
+                msg     : "Promise has to many characters."
+            }
+        ]
+    };
 
 if (submitBtn) {
     promise = new Promise("promise");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = promise.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -20,11 +30,11 @@ if (submitBtn) {
     }, false);
 } else {
     var updateBtn = document.querySelector("#update");
-    promise         = new Promise("id", "promise");
+    promise       = new Promise("id", "promise");
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = promise.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

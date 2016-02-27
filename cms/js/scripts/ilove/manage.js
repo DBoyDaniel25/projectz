@@ -4,16 +4,25 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("ilove.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    ilove;
+    validate  = Validate(),
+    ilove,
+    options = {
+        checkIsEmpty : true,
+        specific :[
+            {
+                property : "ilove",
+                length : 200,
+                msg : "ILove has to many characters."
+            }
+        ]
+    };
 
 if (submitBtn) {
     ilove = new ILove("ilove");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        var data = ilove.getFormValues().getValues();
-        console.log(data);
-        if (validate.isFieldsEmpty(data)) {
+        var data    = ilove.getFormValues().getValues();
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -25,7 +34,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = ilove.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

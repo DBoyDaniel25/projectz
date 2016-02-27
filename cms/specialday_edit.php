@@ -290,7 +290,7 @@
                     <div class="col-sm-12">
                         <h4 class="pull-left page-title">
                             
-    Edit a Quote
+    Edit a Special Day
 
                         </h4>
                         <ol class="breadcrumb pull-right">
@@ -304,6 +304,9 @@
                 
     
 <div class="row form">
+    <div id="errorBlk" class="text-danger">
+
+    </div>
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">Update

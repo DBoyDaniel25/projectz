@@ -5,18 +5,28 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("quote.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
+    validate  = Validate(),
     /**
      *@type Quote
      */
-    quote;
+    quote,
+    options   = {
+        checkIsEmpty: true,
+        specific    : [
+            {
+                property: "quote",
+                length  : 260,
+                msg     : "Quote has to many characters."
+            }
+        ]
+    };
 
 if (submitBtn) {
     quote = new Quote("quote");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = quote.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -28,7 +38,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = quote.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

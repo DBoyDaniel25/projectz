@@ -304,6 +304,9 @@
                 
     
 <div class="row form">
+    <div id="errorBlk" class="text-danger">
+
+    </div>
     <div class="col-sm-12">
         <div class="panel panel-default">
             <div class="panel-heading"><h3 class="panel-title">Create

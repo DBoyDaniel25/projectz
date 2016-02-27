@@ -6,15 +6,25 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("reassure.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    reassure;
+    validate  = Validate(),
+    reassure,
+    options   = {
+        checkIsEmpty: true,
+        specific    : [
+            {
+                property: "reassure",
+                length  : 300,
+                msg     : "Reassure has to many characters."
+            }
+        ]
+    };
 
 if (submitBtn) {
     reassure = new Reassure("reassure");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = reassure.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -26,7 +36,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = reassure.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

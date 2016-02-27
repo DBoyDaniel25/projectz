@@ -6,15 +6,25 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("memory.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    memory;
+    validate  = Validate(),
+    memory,
+    options = {
+        checkIsEmpty : true,
+        specific :[
+            {
+                property : "memory",
+                length : 300,
+                msg : "Memory has to many characters."
+            }
+        ]
+    };
 
 if (submitBtn) {
     memory = new Memory("memory");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = memory.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -26,7 +36,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = memory.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

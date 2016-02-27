@@ -5,15 +5,30 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("specialday.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    specialday;
+    validate  = Validate(),
+    specialday,
+    options   = {
+        checkIsEmpty: true,
+        specific    : [
+            {
+                property: "date",
+                length  : 5,
+                msg     : "Date is to long"
+            },
+            {
+                property: "message",
+                length  : 120,
+                msg     : "Message is to long"
+            }
+        ]
+    };
 
 if (submitBtn) {
     specialday = new SpecialDay("date", "message");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = specialday.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
@@ -25,7 +40,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = specialday.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }

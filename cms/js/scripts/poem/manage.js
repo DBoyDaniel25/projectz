@@ -4,15 +4,30 @@
 var submitBtn = document.querySelector("#create"),
     manage    = new Manager("poem.php"),
     notif     = new Notify(),
-    validate  = new Validate(),
-    poem;
+    validate  = Validate(),
+    poem,
+    options = {
+        checkIsEmpty : true,
+        specific :[
+            {
+                property : "name",
+                length : 120,
+                msg : "Poem Name has to many characters."
+            },
+            {
+                property : "author",
+                length : 45,
+                msg : "Author has to many characters"
+            }
+        ]
+    };
 
 if (submitBtn) {
     poem = new Poem("name", "poem", "author");
     submitBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = poem.getFormValues().getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Fill in all fields");
             return;
         }
@@ -24,7 +39,7 @@ if (submitBtn) {
     updateBtn.addEventListener("click", function (e) {
         e.preventDefault();
         var data = poem.getFormValues(true).getValues();
-        if (validate.isFieldsEmpty(data)) {
+        if (validate.validate(data, options)) {
             notif.error("Please fill in all fields");
             return;
         }
